@@ -3,39 +3,29 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import User from "../models/user.model";
 import { createConnection, closeConnection } from "../connection/connection";
+import { error } from "console";
 dotenv.config();
-
-const payload = {
-    usuarioId: 123456,
-    nombreUsuario: 'Erick',
-    rol: 'admin'
-};
-
 createConnection();
-const privateKey: string = process.env.PRIVATE_KEY || '';
-const getUser = (req: Request, res: Response): void => {
-    if (!privateKey) {
-        res.status(500).send({
-            message: `Private key not found`
-        });
-        return;
-    }
 
-    const token = jwt.sign(payload, privateKey, { algorithm: 'HS256' });
-    res.status(200).send({
-        message: `token generate: ${token}`
-    });
-};
-
-const insertUser = async (req: Request, res: Response) => {
+const insertUser = async (req: Request, res: Response): Promise<void> => {
     try {
-        const data = await req.body;
+        const data = req.body;
         await User.db.collection("users").insertOne(data);
-    } catch (error) {
-        console.error(error);
+        res.status(200).send({ message: 'User added correctly' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: 'Internal server error' });
     }
-    res.status(200).send({ message: `user added correctly` });
-    closeConnection();
 };
 
-export { getUser, insertUser }
+const getUser = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const users = await User.db.collection("users").find({}).toArray()
+        res.status(200).send(users);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: 'Internal server error' });
+    }
+};
+
+export { getUser, insertUser };
