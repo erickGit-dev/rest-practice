@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { promises } from "dns";
 dotenv.config();
 
 const uri: string | undefined = process.env.DATABASE_URI || '';
