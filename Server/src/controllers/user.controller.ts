@@ -4,7 +4,6 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import User from "../models/user.model";
 import { createConnection, closeConnection } from "../connection/database.connection";
-
 dotenv.config();
 createConnection();
 
@@ -32,18 +31,23 @@ const showUsers = async (req: Request, res: Response): Promise<void> => {
 };
 
 const authUsers = async (req: Request, res: Response): Promise<void> => {
+    const { email, password} = req.body;
+    const key = process.env.PRIVATE_KEY || '';
+    const user = await User.db.collection("users").findOne({ email });
 
-    try {
-
-    } catch (error) {
-        console.error(error);
+    if (!user || !bcrypt.compareSync(password, user.password )) {
+        res.status(401).json({ message: 'Incorrect credentials' });
+    } else {
+        const token = jwt.sign({ userId: user?._id, name: user?.name }, key, { expiresIn: '180s' });
+        res.cookie('cookie', token, { httpOnly: true });
+        res.json({ message: 'login successfully' });
     }
 }
+
 
 const updateUser = async (req: Request, res: Response): Promise<void> => {
     try {
         const data = await User.db.collection(("users")).findOne({ id: req.params._id })
-
     } catch (error) {
         console.error(error)
     }
