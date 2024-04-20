@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { showUsers, insertUser, authUsers} from "../controllers/user.controller";
-import { verifyToken } from "../middlewares/users.auth";
+import { showUsers, insertUser, authUsers, updateUser } from "../controllers/user.controller";
+import { authToken } from "../middlewares/auth.token";
 const router = Router();
 
 router.get('/users', showUsers);
-router.post('/singin', insertUser);
-router.post('/login', authUsers);
+router.post('/singUp', insertUser);
+router.post('/singIn', authUsers);
+router.put('/updateUser/:id', updateUser);
 
 export default router;
