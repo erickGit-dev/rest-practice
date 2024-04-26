@@ -2,11 +2,11 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "ESNext",                             
-    "rootDir": "./src",                               
+    "rootDir": "src",                               
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "allowJs": true,
-    "outDir": "./dist",                                   
+    "outDir": "dist",                                   
     "esModuleInterop": true,                            
     "forceConsistentCasingInFileNames": true,            
     "strict": true,                                      

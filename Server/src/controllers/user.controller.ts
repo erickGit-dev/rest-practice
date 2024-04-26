@@ -13,7 +13,7 @@ const insertUser = async (req: Request, res: Response): Promise<void> => {
     const hashPassword: string = await bcrypt.hash(data.password, 8);
     data.password = hashPassword;
     try {
-        await User.db.collection("users").insertOne(data);
+        await User.insertMany(data);
         res.status(200).send({ message: 'User added correctly' });
     } catch (err) {
         console.error(err);
@@ -21,13 +21,12 @@ const insertUser = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-const showUsers = async (req: Request, res: Response): Promise<void> => {
+const listUsers = async (req: Request, res: Response): Promise<void> => {
     try {
-        const users = await User.db.collection("users").find({}).toArray()
-        res.status(200).send(users);
+        const data = await User.find({}) 
+        res.status(200).send(data);
     } catch (error) {
         console.error(error);
-        res.status(500).send({ error: 'Internal server error' });
     }
 };
 
@@ -39,8 +38,8 @@ const authUsers = async (req: Request, res: Response): Promise<void> => {
     if (!user || !bcrypt.compareSync(data.password, user.password)) {
         res.status(401).json({ message: 'Incorrect credentials' });
     } else {
-        const token = jwt.sign({ userId: user?._id, name: user?.name }, key, { expiresIn: '180s' });
-        res.cookie('cookie', token, { httpOnly: true });
+        const token = jwt.sign({ name: user.name }, key);
+        res.cookie('token', token, { httpOnly: true });
         res.json({ message: 'Login successfully' });
     }
 }
@@ -54,7 +53,6 @@ const updateUser = async (req: Request, res: Response): Promise<void> => {
         const user = await User.findOneAndUpdate(
             { _id: req.params.id },
             data,
-            { new: true }
         );
         if (!user) {
             res.status(404).json({ message: 'Document not found' });
@@ -80,4 +78,4 @@ const deleteUser = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-export { insertUser, showUsers, authUsers, updateUser, deleteUser };
+export { insertUser, listUsers, authUsers, updateUser, deleteUser };

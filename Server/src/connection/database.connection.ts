@@ -21,4 +21,4 @@ const closeConnection = async () => {
         console.error(`something failed`, error);
     }
 }
-export { createConnection, closeConnection }  
+export { createConnection, closeConnection } 
