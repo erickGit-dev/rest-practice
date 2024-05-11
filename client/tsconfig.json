@@ -1,11 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES6",
+    "module": "ESNext", 
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],  
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
+    "rootDir": "src",
+    "outDir": "dist",
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -13,7 +17,6 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -22,5 +25,5 @@
   },
   "include": [
     "src"
-  ]
+, "webpack.config.ts"  ]
 }

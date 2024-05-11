@@ -1,8 +1,4 @@
-.nav{
-    background-color: white;
-    .ul{
-        .li{
-            text-decoration: none;
-        }
-    }
+.navbar{
+    margin-top: 0;
+    background-color: aqua;
 }
