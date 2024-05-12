@@ -1,4 +1,35 @@
-.navbar{
-    margin-top: 0;
-    background-color: aqua;
+nav {
+    background-color: #18181a;
+    padding: 13px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    position: sticky;
+    top: 0;
+
+    .app-name {
+        font-size: 1.3rem;
+        text-decoration: none;
+        margin: 5px 33px 5px 0px;
+        padding: 0 3px;
+        color: #a7a7a7;
+    }
+
+    ul {
+        display: flex;
+        li {
+            list-style: none;
+            a {
+                margin: 0 0.5rem;
+                padding: 0.3rem;
+                display: block;
+                text-decoration: none;
+                color: #a7a7a7;
+                border-radius: 0.5rem;
+                :hover {
+                    color: #ff5c77;
+                }
+            }
+        }
+    }
 }

@@ -1,22 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import sNav from "../styles/navbar.module.css";
+import style from "../styles/navbar.module.css";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className={sNav['navbar']}>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/contacts">Contact</Link>
-          </li>
-        </ul>
-    </nav>
+    <nav>
+      <Link to="/" className={style['app-name']}>Cer0</Link>
+      <ul>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/contacts">Contact</Link>
+        </li>
+        <li>
+          <Link to="/singup">Sing Up</Link>
+        </li>
+        <li>
+          <Link to="/login">Log In</Link>
+        </li>
+      </ul>
+    </nav >
   );
 }
 

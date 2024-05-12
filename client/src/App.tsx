@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 
 const App: React.FC = () => {
   return (
-    <div className = {style['body']}>
+    <div className={style['body']}>
       <Navbar />
       <Outlet />
     </div>
