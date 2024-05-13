@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-icons": "^3.0.0",
     "typescript-plugin-css-modules": "^5.1.0"
   }
 }

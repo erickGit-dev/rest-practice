@@ -1,5 +1,9 @@
 nav {
-    background-color: #18181a;
+    --navColor: #18181A;
+    --textColor: #A7A7A7;
+    --textHover: #C8C8C8;
+
+    background-color: var(--navColor);
     padding: 13px;
     display: flex;
     justify-content: start;
@@ -8,11 +12,11 @@ nav {
     top: 0;
 
     .app-name {
-        font-size: 1.3rem;
+        font-size: 1.8rem;
         text-decoration: none;
         margin: 5px 33px 5px 0px;
         padding: 0 3px;
-        color: #a7a7a7;
+        color: var(--textColor);
     }
 
     ul {
@@ -20,15 +24,16 @@ nav {
         li {
             list-style: none;
             a {
-                margin: 0 0.5rem;
+                margin: 0 1.0rem;
                 padding: 0.3rem;
                 display: block;
                 text-decoration: none;
-                color: #a7a7a7;
+                color: var(--textColor);
                 border-radius: 0.5rem;
-                :hover {
-                    color: #ff5c77;
-                }
+            }
+
+            a:hover {
+                color: var(--navColor);
             }
         }
     }
