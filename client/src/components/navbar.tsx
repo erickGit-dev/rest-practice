@@ -4,30 +4,26 @@ import { Link } from "react-router-dom";
 import style from "../styles/navbar.module.css";
 
 const Navbar: React.FC = () => {
+  const navRef = React.useRef<HTMLDivElement>(null);
+
+  const toggleNav = () => {
+   navRef.current?.classList.toggle(style['nav-toggle']);
+  }
+
   return (
     <header>
-      <nav>
-        <Link to="/" className={style['app-name']}>Cer0</Link>
-        <ul>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/contacts">Contact</Link>
-          </li>
-          <li>
-            <Link to="/singup">Sing Up</Link>
-          </li>
-          <li>
-            <Link to="/login">Log In</Link>
-          </li>
-        </ul>
-        <button>
-          <FaBars />
+      <Link to="/" className={style['app-name']}>Cer0</Link>
+      <nav ref={navRef}>
+        <Link to="/about" onClick={toggleNav}>About</Link>
+        <Link to="/contacts" onClick={toggleNav}>Contacts</Link>
+        <Link to="/singup" onClick={toggleNav} className={style['sing-up']}>Sing Up </Link>
+        <Link to="/login" onClick={toggleNav} className={style['log-in']} >Log In</Link>
+        <button className={style['menu-close']} onClick={toggleNav}>
+          <FaX size={'1.3em'} />
         </button>
       </nav >
-      <button>
-        <FaX />
+      <button className={style['menu-bars']} onClick={toggleNav}>
+        <FaBars size={'1.3em'} />
       </button>
     </header>
   );

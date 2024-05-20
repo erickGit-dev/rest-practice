@@ -8,13 +8,13 @@
 }
 
 :root{
-    --mainColor: #18181A;
-    --bodyColor: #1C1C1C;
-    --textColor: #A7A7A7;
+    --mainColor: #080808;
+    --bodyColor: #0C0C0F;
+    --textColor: #D8D8D8;
 }
 
 .body {
-    background-color: val(--bodyColor);
+    background-color: var(--mainColor);
     width: 100%;
     height: 100%;
 }
