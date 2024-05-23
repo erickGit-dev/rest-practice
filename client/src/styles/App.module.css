@@ -8,13 +8,15 @@
 }
 
 :root{
-    --mainColor: #080808;
-    --bodyColor: #0C0C0F;
-    --textColor: #D8D8D8;
+    --darkModeBackground: #080808;
+    --darkModeBody: #0C0C0F;
+    --darkModeText: #D8D8D8;
 }
 
 .body {
     background-color: var(--mainColor);
     width: 100%;
     height: 100%;
+    margin: 0;
+    padding: 0;
 }

@@ -1,18 +1,19 @@
 :root {
     --mainColor: #080808;
     --buttonColor: #18181A;
-    --textColor: #A7A7A7;
+    --textColor: #D8D8D8;
     --textHover: #D1D0D0;
 }
 
 header {
+    position: sticky;
+    top: 0;
     background-color: var(--mainColor);
     padding: 0 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 80px;
-    position: sticky;
 
     & .app-name {
         font-size: 1.8rem;
@@ -27,7 +28,7 @@ header {
 
         & a {
             margin: 0 1.0rem;
-            padding: 0.8rem 1.0rem;
+            padding: 0.5rem;
             display: block;
             text-decoration: none;
             color: var(--textColor);
@@ -41,18 +42,15 @@ header {
         }
 
         & .sing-up {
-            background-color: var(--buttonColor);
-        }
-
-        & .log-in {
             background-color: #000000;
-            
+
             &:hover {
                 background-color: #000000;
                 color: var(--textHover);
             }
+            
         }
-
+        
         & .menu-close {
             padding: 5px;
             cursor: pointer;
@@ -82,7 +80,7 @@ header {
         & .menu-bars {
             visibility: visible;
             opacity: 1;
-            margin-right: 3px;
+            margin-right: 0.03rem;
         }
 
         & nav {
@@ -99,6 +97,7 @@ header {
             opacity: 2px;
             color: var(--textColor);
             gap: 1rem;
+            transition: 1s;
             transform: translateY(-100vh);
 
             & a {

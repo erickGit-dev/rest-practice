@@ -1,0 +1,79 @@
+:root {
+    --lightModeBackground: #ffffff;
+    --lightModeText: #18181A;
+    --darkModeBackground: #080808;
+    --darkModeText: #D8D8D8;    
+    --offDarkModeBackground: #18181A;
+}
+
+.sing-up {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--darkModeBackground);
+
+    & .app-name {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 1.8rem;
+        text-decoration: none;
+        color: var(--darkModeText);
+        padding: 0.8rem;
+        margin: 1rem;
+    }
+
+    & .card {
+        display: flex;
+        flex-direction: column;
+        border-radius: 1rem;
+        align-items: center;
+        background-color: var(--lightModeBackground);
+        width: 12em;
+        height: 13em;
+        padding: 8rem;
+        margin: 2rem;
+        color: var(--lightModeText);
+
+        & input {
+            color: var(--darkModeText);
+            margin: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: 0.2rem solid var(--darkModeText);
+
+            &[type=text]{
+                width: 13rem;
+            }
+
+            &[type=password]{
+                width: 11rem;
+            }
+
+            &:focus {
+                outline: none;
+                border: 0.2rem solid var(--lightModeBackground);
+            }
+        }
+
+        & button {
+            background-color: var(--darkModeBackground);
+            color: var(--darkModeText);
+            width: 8rem;
+            margin: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: #080808;
+
+            &:hover {
+                background-color: var(--offDarkModeBackground);
+            }
+        }
+    }
+}
