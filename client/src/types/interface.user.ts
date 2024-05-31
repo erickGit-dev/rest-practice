@@ -3,7 +3,6 @@ interface IUser {
     lastName: string,
     email: string,
     password: string,
-    ron: string
 }
 
 export default IUser

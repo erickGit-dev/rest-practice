@@ -41,18 +41,27 @@
         margin: 2rem;
         color: var(--lightModeText);
 
+        & .response {
+            background-color: var(--offDarkModeBackground);
+        }
+
         & input {
             color: var(--darkModeText);
             margin: 0.5rem;
             padding: 0.5rem;
             border-radius: 0.5rem;
             border: 0.2rem solid var(--darkModeText);
+            transition: width 0.3s ease-in-out;
 
-            &[type=text]{
+            &[type=text] {
                 width: 13rem;
             }
 
-            &[type=password]{
+            &[type=email] {
+                width: 11rem;
+            }
+
+            &[type=password] {
                 width: 11rem;
             }
 
@@ -69,7 +78,7 @@
             margin: 0.5rem;
             padding: 0.5rem;
             border-radius: 0.5rem;
-            border: #080808;
+            border: var(--darkModeBackground);
 
             &:hover {
                 background-color: var(--offDarkModeBackground);
