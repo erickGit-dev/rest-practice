@@ -3,7 +3,7 @@ import App from "../../App"
 import Home from "../pages/home";
 import Contacts from "../pages/contacts";
 import About from "../pages/about";
-import Singup from "../pages/singup";
+import Signup from "../pages/signup";
 import Login from "../pages/login";
 
 const router = createBrowserRouter([{
@@ -13,7 +13,7 @@ const router = createBrowserRouter([{
         { path: "", element: <Home/>},
         { path: "contacts", element: <Contacts/>},
         { path: "about", element: <About/>},
-        { path: "singup", element: <Singup/>},
+        { path: "signup", element: <Signup/>},
         { path: "login", element: <Login/>}
     ]     
 }])

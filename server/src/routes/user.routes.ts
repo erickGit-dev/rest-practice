@@ -4,7 +4,7 @@ import { authToken } from "../middlewares/auth.token";
 const router = Router();
 
 router.get('/users', authToken, listUsers);
-router.post('/singUp', insertUser);
+router.post('/signUp', insertUser);
 router.post('/logIn', authUsers);
 router.put('/updateUser/:id', authToken, updateUser);
 router.delete('/deleteUser/:id', authToken, deleteUser);

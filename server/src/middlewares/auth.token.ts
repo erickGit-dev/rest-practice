@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 import User from '../models/user.model';
-import { IUser } from '../interfaces/user.interface';
 dotenv.config();
 
 declare global {
@@ -13,7 +12,7 @@ declare global {
     }
 }
 
-export const authToken = async (req: Request, res: Response, next: NextFunction): Promise<void> =>{
+export const authToken = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const token = req.cookies.token as string;
     console.log(req.cookies);
 

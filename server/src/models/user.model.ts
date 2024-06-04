@@ -5,9 +5,9 @@ const schema = new mongoose.Schema<IUser>({
         type: String,
         required: false
     },
-    secondName: {
+    lastName: {
         type: String,
-        required: false
+        required: false 
     },
     email: {
         type: String,

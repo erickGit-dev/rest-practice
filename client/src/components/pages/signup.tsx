@@ -3,7 +3,7 @@ import Style from "../../styles/singup.module.css"
 import { Link } from "react-router-dom";
 import IUser from "../../types/interface.user";
 
-const Singup: React.FC = () => {
+const Signup: React.FC = () => {
   const [data, setData] = useState<IUser>({
     name: '',
     lastName: '',
@@ -21,7 +21,7 @@ const Singup: React.FC = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:3001/api/v0/singup/', {
+      const res = await fetch('http://localhost:3001/api/v0/signup/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ const Singup: React.FC = () => {
       setResponse(newData.message);
     } catch (error) {
       console.error(error);
-      setResponse('error at submit the form');
+      setResponse('Please fill all the fields');
     }
   };
 
@@ -75,4 +75,4 @@ const Singup: React.FC = () => {
   );
 }
 
-export default Singup;
+export default Signup;

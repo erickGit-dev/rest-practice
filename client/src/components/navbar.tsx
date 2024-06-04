@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
         <Link to="/about" onClick={toggleNav}>About</Link>
         <Link to="/contacts" onClick={toggleNav}>Contacts</Link>
         <Link to="/login" onClick={toggleNav} className={Style['log-in']} >Log In</Link>
-        <Link to="/singup" onClick={toggleNav} className={Style['sing-up']}>Sing Up </Link>
+        <Link to="/signup" onClick={toggleNav} className={Style['sign-up']}>Sign Up </Link>
         <button className={Style['menu-close']} onClick={toggleNav}>
           <FaX size={'1.3em'} />
         </button>

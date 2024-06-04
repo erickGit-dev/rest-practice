@@ -10,11 +10,21 @@ createConnection();
 
 const insertUser = async (req: Request, res: Response): Promise<void> => {
     const data: IUser = req.body;
-    const hashPassword: string = await bcrypt.hash(data.password, 8);
-    data.password = hashPassword;
+    if (!data.password) {
+        res.status(400).send({ error: 'Password is required' });
+    }
+
     try {
-        await User.insertMany(data);
-        res.status(200).send({ message: 'User added correctly' });
+        const hashPassword: string = await bcrypt.hash(data.password, 8);
+        data.password = hashPassword;
+
+        const user = await User.findOne({ email: data.email })
+        if (data.email == user?.email) {
+            res.status(409).send({ message: 'Email already exist' });
+        } else {
+            await User.insertMany(data);
+            res.status(200).send({ message: 'User added correctly' })
+        }
     } catch (err) {
         console.error(err);
         res.status(500).send({ error: 'Internal server error' });
@@ -23,7 +33,7 @@ const insertUser = async (req: Request, res: Response): Promise<void> => {
 
 const listUsers = async (req: Request, res: Response): Promise<void> => {
     try {
-        const data = await User.find({}) 
+        const data = await User.find({})
         res.status(200).send(data);
     } catch (error) {
         console.error(error);
@@ -66,9 +76,7 @@ const updateUser = async (req: Request, res: Response): Promise<void> => {
 
 const deleteUser = async (req: Request, res: Response): Promise<void> => {
     try {
-        const user = await User.findByIdAndDelete(
-            req.params.id
-        )
+        const user = await User.findByIdAndDelete( req.params.id )
         if (!user) {
             res.status(404).json({ message: 'User dont found' });
         }

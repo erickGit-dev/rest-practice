@@ -42,7 +42,7 @@
         color: var(--lightModeText);
 
         & .response {
-            background-color: var(--offDarkModeBackground);
+            background-color: var(--darkModeBackground);
         }
 
         & input {
