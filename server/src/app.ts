@@ -1,11 +1,14 @@
-import user from "./routes/user.routes";
+import users from "./routes/user.routes";
+import products from "./routes/products.routes";
 import express from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import { createConnection } from "./connection/database.connection";
 dotenv.config();
+createConnection();
 
 const app = express();
 const port = process.env.PORT || 3008;
@@ -16,7 +19,8 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
-app.use("/api/v0/", user);
+app.use("/api/v0/", users);
+app.use("/api/v1/", products);
 
 app.listen(port, () => {
     console.log(`Server listen on port ${port}`);

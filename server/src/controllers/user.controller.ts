@@ -3,15 +3,15 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import User from "../models/user.model";
-import { createConnection, closeConnection } from "../connection/database.connection";
 import { IUser } from "../interfaces/user.interface";
 dotenv.config();
-createConnection();
 
 const insertUser = async (req: Request, res: Response): Promise<void> => {
     const data: IUser = req.body;
     if (!data.password) {
-        res.status(400).send({ error: 'Password is required' });
+        res.status(400).send({
+            error: 'Password is required'
+        });
     }
 
     try {
@@ -20,20 +20,26 @@ const insertUser = async (req: Request, res: Response): Promise<void> => {
 
         const user = await User.findOne({ email: data.email })
         if (data.email == user?.email) {
-            res.status(409).send({ message: 'Email already exist' });
+            res.status(409).send({
+                message: 'Email already exist'
+            });
         } else {
             await User.insertMany(data);
-            res.status(200).send({ message: 'User added correctly' })
+            res.status(200).send({
+                message: 'User added correctly'
+            })
         }
     } catch (err) {
         console.error(err);
-        res.status(500).send({ error: 'Internal server error' });
+        res.status(500).send({
+            error: 'Internal server error'
+        });
     }
 };
 
 const listUsers = async (req: Request, res: Response): Promise<void> => {
     try {
-        const data = await User.find({})
+        const data: unknown = await User.find({})
         res.status(200).send(data);
     } catch (error) {
         console.error(error);
@@ -42,15 +48,21 @@ const listUsers = async (req: Request, res: Response): Promise<void> => {
 
 const authUsers = async (req: Request, res: Response): Promise<void> => {
     const data: IUser = req.body;
-    const key = process.env.PRIVATE_KEY || '';
-    const user = await User.findOne({ email: data.email });
+    const key: string = process.env.PRIVATE_KEY || '';
+    const user: IUser | null = await User.findOne({
+        email: data.email
+    });
 
     if (!user || !bcrypt.compareSync(data.password, user.password)) {
-        res.status(401).json({ message: 'Incorrect credentials' });
+        res.status(401).json({
+            message: 'Incorrect credentials'
+        });
     } else {
         const token = jwt.sign({ name: user.name }, key);
         res.cookie('token', token, { httpOnly: true });
-        res.json({ message: 'Login successfully' });
+        res.json({
+            message: 'Login successfully'
+        });
     }
 }
 
@@ -60,29 +72,41 @@ const updateUser = async (req: Request, res: Response): Promise<void> => {
     data.password = hashPassword;
 
     try {
-        const user = await User.findOneAndUpdate(
+        const user: IUser | null = await User.findOneAndUpdate(
             { _id: req.params.id },
             data,
         );
         if (!user) {
-            res.status(404).json({ message: 'Document not found' });
+            res.status(404).json({
+                message: 'Document not found'
+            });
         }
-        res.json({ message: 'Document updated successfully' });
+        res.json({
+            message: 'Document updated successfully'
+        });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({
+            message: 'Internal server error'
+        });
     }
 }
 
 const deleteUser = async (req: Request, res: Response): Promise<void> => {
     try {
-        const user = await User.findByIdAndDelete( req.params.id )
+        const user: IUser | null = await User.findByIdAndDelete(req.params.id)
         if (!user) {
-            res.status(404).json({ message: 'User dont found' });
+            res.status(404).json({
+                message: 'User dont found'
+            });
         }
-        res.status(200).json({ message: 'User deleted correctly' });
+        res.status(200).json({
+            message: 'User deleted correctly'
+        });
     } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({
+            message: 'Internal server error'
+        });
     }
 }
 

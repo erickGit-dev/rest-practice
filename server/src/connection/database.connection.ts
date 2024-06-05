@@ -2,12 +2,17 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
-const uri: string | undefined = process.env.DATABASE_URI || '';
+const URI_DB: string | undefined = process.env.DATABASE_URI || '';
 const createConnection = async () => {
     try {
-        !uri ? console.log(`Connection string error`) :
-            await mongoose.connect(uri);
-        console.log(`Connection successfuly created`);
+        !URI_DB ? console.log(`Connection string error`) :
+            await mongoose.connect(URI_DB), {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            };
+        console.log({
+            text: `Connection successfuly created`
+        });
     } catch (error) {
         throw error
     }
@@ -16,9 +21,11 @@ const createConnection = async () => {
 const closeConnection = async () => {
     try {
         await mongoose.disconnect();
-        console.log({ text: `Connection close successfuly`});
+        console.log({
+            text: `Connection successfuly closed`
+        });
     } catch (error) {
-        console.error(`something failed`, error);
+        console.error(`Something failed`, error);
     }
 }
 export { createConnection, closeConnection } 
