@@ -74,7 +74,7 @@ const updateUser = async (req: Request, res: Response): Promise<void> => {
     try {
         const user: IUser | null = await User.findOneAndUpdate(
             { _id: req.params.id },
-            data,
+            data
         );
         if (!user) {
             res.status(404).json({
@@ -104,6 +104,7 @@ const deleteUser = async (req: Request, res: Response): Promise<void> => {
             message: 'User deleted correctly'
         });
     } catch (error) {
+        console.error(error)
         res.status(500).json({
             message: 'Internal server error'
         });
