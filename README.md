@@ -5,16 +5,8 @@
 - Typescript 
 - MongoDB (Mongoose)
 
-### The server side
-To start the server you need to install all the dependencies run `npm i` .
-Run `npm run dev` to execute the app in develop mode.
-Run  `npm run build` to transpile the code of Typescript to Javascript.
-Finaly run `npm start` to start the server.
+### Why?
+ This app will help to get the knowlege about how the technologies works together using APIs.
 
-### Endpoints 
-The user manage and auth using JWT endpoints
-- get /api/users/
-- post /api/singUp/
-- post /api/singIn/
-- put /updateUser/:id
-- delete /api/deleteUser/:id
+### The backend...
+
