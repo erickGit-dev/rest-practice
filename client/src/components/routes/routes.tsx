@@ -5,12 +5,14 @@ import Contacts from "../pages/contacts";
 import About from "../pages/about";
 import Signup from "../pages/signup";
 import Login from "../pages/login";
+import Products from "../pages/products";
 
 const router = createBrowserRouter([{
     path: "/",
     element: <App/>,
     children: [
         { path: "", element: <Home/>},
+        { path: "products", element: <Products/>},
         { path: "contacts", element: <Contacts/>},
         { path: "about", element: <About/>},
         { path: "signup", element: <Signup/>},

@@ -2,37 +2,68 @@ import React, { useState } from "react";
 import Style from "../../styles/singup.module.css"
 import { Link } from "react-router-dom";
 import IUser from "../../types/interface.user";
+import { config } from "../../config";
+import { TErrors } from "../../types/type.error";
+import { spawn } from "child_process";
 
 const Signup: React.FC = () => {
-  const [data, setData] = useState<IUser>({
+  const initalState: IUser = {
     name: '',
     lastName: '',
     email: '',
     password: ''
-  });
+  };
 
+  const [data, setData] = useState<IUser>(initalState);
+  const [error, setError] = useState<TErrors>({});
   const [response, setResponse] = useState<string>('')
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData((preview) => ({ ...preview, [name]: value }));
   };
 
+  const handleErrors = () => {
+    const errors: TErrors = {}
+    if (!data.name) {
+      errors.name = 'Name is required';
+    };
+    if (!data.lastName) {
+      errors.lastName = 'Last Name is required';
+    };
+    if (!data.email) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+      errors.email = 'Invalid Email';
+    };
+    if (!data.password) {
+      errors.password = 'Password is required';
+    } else if (data.password.length < 8) {
+      errors.password = 'The password must be 8 letters';
+    }
+    return errors;
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    try {
-      const res = await fetch('http://localhost:3001/api/v0/signup/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-      const newData = await res.json();
-      setResponse(newData.message);
-    } catch (error) {
-      console.error(error);
-      setResponse('Please fill all the fields');
+    const signUpURL: string = config.signUpURL;
+    const errorValidation = handleErrors();
+    setError(errorValidation);
+    if (Object.keys(errorValidation).length === 0) {
+      try {
+        const req = await fetch(signUpURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+        const newData = await req.json();
+        setResponse(newData.message);
+        setData(initalState);
+      } catch (error) {
+        setResponse('Please all the fields')
+        console.error(error);
+      }
     }
   };
 
@@ -50,25 +81,29 @@ const Signup: React.FC = () => {
             value={data.name}
             onChange={handleChange}
             placeholder="Name" />
-          <input
+            <div className={Style['errors']}>{error.name}</div>
+            <input
             type="text"
             name="lastName"
             value={data.lastName}
             onChange={handleChange}
             placeholder="Last Name" />
-          <input
+            <div className={Style['errors']}>{error.lastName}</div>
+            <input
             type="email"
             name="email"
             value={data.email}
             onChange={handleChange}
             placeholder="Email" />
-          <input
+            <div className={Style['errors']}>{error.email}</div>
+            <input
             type="password"
             name="password"
             value={data.password}
             onChange={handleChange}
             placeholder="Password" />
-          <button type="submit">Sing Up</button>
+            <div className={Style['errors']}>{error.password}</div>
+          <button type="submit">Sign Up</button>
         </div>
       </form>
     </div>

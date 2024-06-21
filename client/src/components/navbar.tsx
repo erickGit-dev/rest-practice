@@ -14,6 +14,7 @@ const Navbar: React.FC = () => {
     <header>
       <Link to="/" className={Style['app-name']}>Cer0</Link>
       <nav ref={navRef}>
+        <Link to="/products" onClick={toggleNav}>Products</Link>
         <Link to="/about" onClick={toggleNav}>About</Link>
         <Link to="/contacts" onClick={toggleNav}>Contacts</Link>
         <Link to="/login" onClick={toggleNav} className={Style['log-in']} >Log In</Link>
