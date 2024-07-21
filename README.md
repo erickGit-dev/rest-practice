@@ -6,7 +6,9 @@
 - MongoDB (Mongoose)
 
 ### Why?
- This app will help to get the knowlege about how the technologies works together using APIs.
+ This app will help to get the knowledge about how the technologies works together using APIs.
 
-### The backend...
+ Still in development
+
+
 
