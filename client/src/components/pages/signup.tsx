@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import Style from "../../styles/singup.module.css"
+import style from "../../styles/singup.module.css"
 import { Link } from "react-router-dom";
 import IUser from "../../types/interface.user";
 import { config } from "../../config";
 import { TErrors } from "../../types/type.error";
-import { spawn } from "child_process";
 
 const Signup: React.FC = () => {
   const initalState: IUser = {
@@ -16,7 +15,8 @@ const Signup: React.FC = () => {
 
   const [data, setData] = useState<IUser>(initalState);
   const [error, setError] = useState<TErrors>({});
-  const [response, setResponse] = useState<string>('')
+  const [response, setResponse] = useState<string>('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData((preview) => ({ ...preview, [name]: value }));
@@ -28,7 +28,7 @@ const Signup: React.FC = () => {
       errors.name = 'Name is required';
     };
     if (!data.lastName) {
-      errors.lastName = 'Last Name is required';
+      errors.lastName = 'Last name is required';
     };
     if (!data.email) {
       errors.email = 'Email is required';
@@ -48,6 +48,7 @@ const Signup: React.FC = () => {
     const signUpURL: string = config.signUpURL;
     const errorValidation = handleErrors();
     setError(errorValidation);
+    setResponse('');
     if (Object.keys(errorValidation).length === 0) {
       try {
         const req = await fetch(signUpURL, {
@@ -58,21 +59,21 @@ const Signup: React.FC = () => {
           body: JSON.stringify(data)
         });
         const newData = await req.json();
-        setResponse(newData.message);
+        setResponse(newData.message)  
         setData(initalState);
       } catch (error) {
-        setResponse('Please all the fields')
         console.error(error);
       }
     }
   };
 
   return (
-    <div className={Style['sing-up']}>
-      <Link to="/" className={Style['app-name']}>Cer0</Link>
+    <div className={style['sing-up']}>
+      <Link to="/" className={style['app-name']}>Cer0</Link>
       <form onSubmit={handleSubmit}>
-        <div className={Style['card']}>
-          <div className={Style['response']} >
+        <div className={style['card']}>
+          Join us!
+          <div className={style['response']} >
             {response}
           </div>
           <input
@@ -81,29 +82,31 @@ const Signup: React.FC = () => {
             value={data.name}
             onChange={handleChange}
             placeholder="Name" />
-            <div className={Style['errors']}>{error.name}</div>
-            <input
+          <div className={style['errors']}>{error.name}</div>
+          <input
             type="text"
             name="lastName"
             value={data.lastName}
             onChange={handleChange}
-            placeholder="Last Name" />
-            <div className={Style['errors']}>{error.lastName}</div>
-            <input
+            placeholder="Last name" />
+          <div className={style['errors']}>{error.lastName}</div>
+          <input
             type="email"
             name="email"
             value={data.email}
             onChange={handleChange}
             placeholder="Email" />
-            <div className={Style['errors']}>{error.email}</div>
-            <input
+          <div className={style['errors']}>{error.email}</div>
+          <input
             type="password"
             name="password"
             value={data.password}
             onChange={handleChange}
             placeholder="Password" />
-            <div className={Style['errors']}>{error.password}</div>
+          <div className={style['errors']}>{error.password}</div>
           <button type="submit">Sign Up</button>
+          Already have an account?
+          <Link to="/login" className={style['log-in']}>Log In</Link>
         </div>
       </form>
     </div>

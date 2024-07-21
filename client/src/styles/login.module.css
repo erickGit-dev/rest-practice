@@ -2,12 +2,12 @@
     --lightModeBackground: #ffffff;
     --lightModeText: #18181A;
     --darkModeBackground: #080808;
-    --darkModeText: #D8D8D8;    
+    --darkModeText: #D8D8D8;
     --offDarkModeBackground: #18181A;
     --errorColor: #ff3535;
 }
 
-.sing-up {
+.log-in {
     margin: 0;
     display: flex;
     align-items: center;
@@ -39,7 +39,7 @@
         height: auto;
         padding: 8rem;
         margin: 2rem;
-        color: var(--lightModeText);
+        color: var(--darkModeText);
 
         & .response {
             color: var(--darkModeText);
@@ -52,10 +52,6 @@
             border-radius: 0.5rem;
             border: 0.2rem solid var(--darkModeText);
             transition: width 0.3s ease-in-out;
-
-            &[type=text] {
-                width: 13rem;
-            }
 
             &[type=email] {
                 width: 11rem;
@@ -90,11 +86,11 @@
             }
         }
 
-        .log-in {
+        .sign-up {
+            text-decoration: none;
             display: block;
             text-align: center;
             width: 5rem;
-            text-decoration: none;
             background-color: var(--darkModeBackground);
             color: var(--darkModeText);
             padding: 0.5rem;
