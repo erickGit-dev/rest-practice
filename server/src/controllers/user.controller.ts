@@ -5,19 +5,14 @@ import dotenv from "dotenv";
 import User from "../models/user.model";
 import { IUser } from "../interfaces/user.interface";
 dotenv.config();
+const blacklist = new Set();
+
 
 const insertUser = async (req: Request, res: Response): Promise<void> => {
     const data: IUser = req.body;
-    if (!data.password) {
-        res.status(400).send({
-            error: 'Password is required'
-        });
-    }
-
     try {
         const hashPassword: string = await bcrypt.hash(data.password, 8);
         data.password = hashPassword;
-
         const user = await User.findOne({ email: data.email })
         if (data.email == user?.email) {
             res.status(409).send({
@@ -110,5 +105,14 @@ const deleteUser = async (req: Request, res: Response): Promise<void> => {
         });
     }
 }
+const logOut = (req: Request, res: Response) => {
+    const token = req.cookies.token;
+    if (token) {
+        blacklist.add(token);
+        res.status(200).send('Logged out');
+    } else {
+        res.status(401).send('No token provided');
+    }
+};
 
-export { insertUser, listUsers, authUsers, updateUser, deleteUser };
+export { insertUser, listUsers, authUsers, updateUser, deleteUser, logOut, blacklist };

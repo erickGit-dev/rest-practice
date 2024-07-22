@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "../../styles/singup.module.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IUser from "../../types/interface.user";
 import { config } from "../../config";
 import { TErrors } from "../../types/type.error";
@@ -16,6 +16,7 @@ const Signup: React.FC = () => {
   const [data, setData] = useState<IUser>(initalState);
   const [error, setError] = useState<TErrors>({});
   const [response, setResponse] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -59,8 +60,12 @@ const Signup: React.FC = () => {
           body: JSON.stringify(data)
         });
         const newData = await req.json();
-        setResponse(newData.message)  
+
+        setResponse(newData.message)
         setData(initalState);
+        setTimeout(() => {
+          navigate('/');
+        }, 1500);
       } catch (error) {
         console.error(error);
       }

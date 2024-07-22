@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "../../styles/login.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IUser from "../../types/interface.user";
 import { TErrors } from "../../types/type.error";
 import { config } from "../../config";
@@ -16,6 +16,7 @@ const Login: React.FC = () => {
   const [data, setData] = useState<IUser>(initalState);
   const [error, setError] = useState<TErrors>({});
   const [response, setResponse] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -53,8 +54,12 @@ const Login: React.FC = () => {
           body: JSON.stringify(data)
         });
         const newData = await req.json();
+
         setResponse(newData.message)
         setData(initalState);
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
       } catch (error) {
         console.error(error);
       }

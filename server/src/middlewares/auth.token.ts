@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 import User from '../models/user.model';
+import { blacklist } from '../controllers/user.controller';
 dotenv.config();
 
 declare global {
@@ -18,6 +19,8 @@ export const authToken = async (req: Request, res: Response, next: NextFunction)
 
     if (!token) {
         res.status(401).json({ message: 'Unauthorized' });
+    } else if (blacklist.has(token)) {
+        res.status(401).send('Token is blacklisted');
     }
 
     try {
