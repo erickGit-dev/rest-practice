@@ -46,11 +46,14 @@ const logIn = async (req: Request, res: Response): Promise<void> => {
         const token = jwt.sign({ name: user.name }, key);
         console.log(token);
         res.cookie('token', token, {
-            httpOnly: true, 
+            httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'none'
-         });
-        res.json({ message: 'Login successfully', token });
+        });
+        res.json({
+            message: 'Login successfully',
+            token
+        });
     }
 }
 
@@ -124,4 +127,4 @@ const deleteUser = async (req: Request, res: Response): Promise<void> => {
 }
 
 
-export { signUP, logIn, logOut, updateUser, deleteUser, blacklist };
+export { signUP, logIn, logOut, listUsers, updateUser, deleteUser, blacklist };
