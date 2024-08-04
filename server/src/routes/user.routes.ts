@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { insertUser, listUsers, authUsers, deleteUser, updateUser, logOut, } from "../controllers/user.controller";
+import { signUP, logIn, deleteUser, updateUser, logOut, } from "../controllers/user.controller";
 import { authToken } from "../middlewares/auth.token";
 const router = Router();
 
-router.get('/users', authToken, listUsers);
-router.post('/sign-up', insertUser);
-router.post('/log-in', authUsers);
+router.post('/sign-up', signUP);
+router.post('/log-in', logIn);
+router.post('/log-out', logOut);
+router.get('/users', authToken);
 router.put('/update-user/:id', authToken, updateUser);
 router.delete('/delete-user/:id', authToken, deleteUser);
-router.post('/log-out', logOut);
 
 export default router;

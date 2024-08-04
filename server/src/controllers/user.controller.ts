@@ -7,8 +7,7 @@ import { IUser } from "../interfaces/user.interface";
 dotenv.config();
 const blacklist = new Set();
 
-
-const insertUser = async (req: Request, res: Response): Promise<void> => {
+const signUP = async (req: Request, res: Response): Promise<void> => {
     const data: IUser = req.body;
     try {
         const hashPassword: string = await bcrypt.hash(data.password, 8);
@@ -32,16 +31,7 @@ const insertUser = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-const listUsers = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const data: unknown = await User.find({})
-        res.status(200).send(data);
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-const authUsers = async (req: Request, res: Response): Promise<void> => {
+const logIn = async (req: Request, res: Response): Promise<void> => {
     const data: IUser = req.body;
     const key: string = process.env.PRIVATE_KEY || '';
     const user: IUser | null = await User.findOne({
@@ -54,12 +44,39 @@ const authUsers = async (req: Request, res: Response): Promise<void> => {
         });
     } else {
         const token = jwt.sign({ name: user.name }, key);
-        res.cookie('token', token, { httpOnly: true });
-        res.json({
-            message: 'Login successfully'
-        });
+        console.log(token);
+        res.cookie('token', token, {
+            httpOnly: true, 
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'none'
+         });
+        res.json({ message: 'Login successfully', token });
     }
 }
+
+const logOut = (req: Request, res: Response) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    console.log(token);
+    if (token) {
+        blacklist.add(token);
+        res.clearCookie('token');
+        res.status(200).send('Logged out');
+    } else {
+        res.status(404).send('No token provided');
+    }
+};
+
+const listUsers = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const data: unknown = await User.find({})
+        res.status(200).send(data);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
 
 const updateUser = async (req: Request, res: Response): Promise<void> => {
     const data: IUser = req.body;
@@ -105,14 +122,6 @@ const deleteUser = async (req: Request, res: Response): Promise<void> => {
         });
     }
 }
-const logOut = (req: Request, res: Response) => {
-    const token = req.cookies.token;
-    if (token) {
-        blacklist.add(token);
-        res.status(200).send('Logged out');
-    } else {
-        res.status(401).send('No token provided');
-    }
-};
 
-export { insertUser, listUsers, authUsers, updateUser, deleteUser, logOut, blacklist };
+
+export { signUP, logIn, logOut, updateUser, deleteUser, blacklist };
