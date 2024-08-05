@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import { createConnection } from "./connection/database.connection";
+import { closeConnection, createConnection } from "./connection/database.connection";
 dotenv.config();
 createConnection();
 
@@ -24,6 +24,9 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/v0/", users);
 app.use("/api/v1/", products);
+
+process.on('SIGINT', closeConnection);
+process.on('SIGTERM', closeConnection);
 
 app.listen(port, () => {
     console.log(`Server listen on port ${port}`);

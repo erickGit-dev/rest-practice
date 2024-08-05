@@ -24,6 +24,7 @@ const closeConnection = async () => {
         console.log({
             text: `Connection successfuly closed`
         });
+        process.exit(0);
     } catch (error) {
         console.error(`Something failed`, error);
     }

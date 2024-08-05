@@ -7,7 +7,7 @@
   "scripts": {
     "clear": "rmdir /s /q /dist",
     "build": "tsc",
-    "start": "tsc && tsx dist/app.js",
+    "start": "tsx dist/app.js",
     "dev": "nodemon",
     "dev:tsx": "tsx --watch src/app.ts"
   },
