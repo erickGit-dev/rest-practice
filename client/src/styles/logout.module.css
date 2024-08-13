@@ -1,0 +1,9 @@
+.log-out {
+    padding: 5px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--textColor);
+    font-size: 1.0rem;
+}

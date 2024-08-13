@@ -46,24 +46,29 @@ const Login: React.FC = () => {
     setResponse('');
     if (Object.keys(errorValidation).length === 0) {
       try {
-        const req = await fetch(logInURL, {
+        const res = await fetch(logInURL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(data)
         });
-        const newData = await req.json();
-
+        const newData = await res.json();
+        if (newData.token) {
+          console.log(newData.token);
+          localStorage.setItem('token', newData.token);
+          setTimeout(() => {
+            navigate('/');
+          }, 2000);
+        } else {
+          console.log('token not recived');
+        }
         setResponse(newData.message)
         setData(initalState);
-        setTimeout(() => {
-          navigate('/');
-        }, 2000);
       } catch (error) {
         console.error(error);
       }
-    }
+    } 
   };
 
   return (

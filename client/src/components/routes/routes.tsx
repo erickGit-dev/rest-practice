@@ -9,15 +9,15 @@ import Products from "../pages/products";
 
 const router = createBrowserRouter([{
     path: "/",
-    element: <App/>,
+    element: <App />,
     children: [
-        { path: "", element: <Home/>},
-        { path: "products", element: <Products/>},
-        { path: "contacts", element: <Contacts/>},
-        { path: "about", element: <About/>},
-        { path: "signup", element: <Signup/>},
-        { path: "login", element: <Login/>}
-    ]     
+        { path: "", element: <Home /> },
+        { path: "products", element: <Products /> },
+        { path: "contacts", element: <Contacts /> },
+        { path: "about", element: <About /> },
+        { path: "signup", element: <Signup /> },
+        { path: "login", element: <Login /> }
+    ]
 }])
 
 export default router;

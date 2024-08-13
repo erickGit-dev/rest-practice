@@ -1,24 +1,19 @@
-:root {
-    --mainColor: #080808;
-    --buttonColor: #18181A;
-    --textColor: #D8D8D8;
-    --textHover: #D1D0D0;
-}
 
 header {
     position: sticky;
     top: 0;
-    background-color: var(--mainColor);
+    background-color: var(--darkModeBackground);
     padding: 0 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
+    height: 80px;   
 
     & .app-name {
-        font-size: 1.8rem;
+        font-size: 18pt;
+        font-weight: 400;
         text-decoration: none;
-        color: var(--textColor);
+        color: var(--darkModeText);
         margin-right: 0;
     }
 
@@ -31,13 +26,13 @@ header {
             padding: 0.5rem;
             display: block;
             text-decoration: none;
-            color: var(--textColor);
+            color: var(--darkModeText);
             border-radius: 0.5rem;
 
             &:hover {
                 transition: 0.3s;
-                color: var(--textHover);
-                background-color: var(--buttonColor);
+                color: var(--darkModeTextHover);
+                background-color: var(--lightModeText);
             }
         }
 
@@ -46,7 +41,7 @@ header {
 
             &:hover {
                 background-color: #000000;
-                color: var(--textHover);
+                color: var(--darkModeTextHover);
             }
             
         }
@@ -57,8 +52,7 @@ header {
             background: transparent;
             border: none;
             outline: none;
-            color: var(--textColor);
-            font-size: 1.0rem;
+            color: var(--darkModeText);
             visibility: hidden;
             opacity: 0;
         }
@@ -70,8 +64,7 @@ header {
         background: transparent;
         border: none;
         outline: none;
-        color: var(--textColor);
-        font-size: 1.0rem;
+        color: var(--darkModeText);
         visibility: hidden;
         opacity: 0;
     }
@@ -93,9 +86,9 @@ header {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: var(--mainColor);
+            background-color: var(--darkModeBackground);
             opacity: 2px;
-            color: var(--textColor);
+            color: var(--darkModeText);
             gap: 1rem;
             transition: 1s;
             transform: translateY(-100vh);

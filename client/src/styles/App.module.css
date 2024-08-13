@@ -1,16 +1,20 @@
 * {
     font-family: "Roboto", sans-serif;
-    font-size: 13.8px;
-    font-weight: 500;
-    font-style: normal;
+    font-size: 11pt;
+    font-weight: normal;
     margin: 0;
     padding: 0;
 }
 
-:root{
+:root {
     --darkModeBackground: #080808;
     --darkModeBody: #0C0C0F;
     --darkModeText: #D8D8D8;
+    --darkModeTextHover: #f7f7f7;
+    --lightModeBackground: #ffffff;
+    --lightModeText: #18181A;
+    --offDarkModeBackground: #18181A;
+    --errorColor: #ff3535;
 }
 
 .body {
