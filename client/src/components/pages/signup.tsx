@@ -10,7 +10,8 @@ const Signup: React.FC = () => {
     name: '',
     lastName: '',
     email: '',
-    password: ''
+    password: '',
+    _id: ""
   };
 
   const [data, setData] = useState<IUser>(initalState);
