@@ -1,0 +1,32 @@
+.products-page {
+    margin: 0;
+    font-size: 8pt;
+
+    & .products-cards {
+        color: var(--darkModeColor);
+
+        & ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            padding: 1rem;
+            max-width: 100%;
+
+            & li {
+                background-color: var(--offDarkModeBackground);
+                margin: 1rem;
+                padding: 1rem;
+                align-items: center;
+                justify-content: center;
+                border-radius: 1rem;
+                list-style: none;
+
+                & img {
+                    border-radius: 1rem;
+                    margin: 0.3rem;
+                    width: 150px;
+                    height: 150px;
+                }
+            }
+        }
+    }
+}

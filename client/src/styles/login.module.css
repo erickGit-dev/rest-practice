@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     position: absolute;
+    font-size: 0.8rem;
     top: 0;
     width: 100%;
     height: 100%;
@@ -28,7 +29,6 @@
         align-items: center;
         background-color: var(--lightModeBackground);
         width: 12em;
-        height: 18rem;
         padding: 8rem;
         margin: 2rem;
         color: var(--darkModeText);
@@ -56,7 +56,7 @@
 
             &:focus {
                 outline: none;
-                border: 0.2rem solid var(--lightModeBackground);
+                border: 0.2em solid var(--lightModeBackground);
             }
         }
 

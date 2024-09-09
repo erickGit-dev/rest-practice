@@ -27,10 +27,11 @@
         flex-direction: column;
         border-radius: 1rem;
         align-items: center;
+        font-size: 0.8rem;
         background-color: var(--lightModeBackground);
-        width: 12em;
-        height: 23rem;  
-        padding: 8rem;
+        width: 15em;
+        height: 100%;  
+        padding: 5rem;
         margin: 2rem;
         color: var(--darkModeText);
 
@@ -61,7 +62,7 @@
 
             &:focus {
                 outline: none;
-                border: 0.2rem solid var(--lightModeBackground);
+                border: 0.2em solid var(--lightModeBackground);
             }
         }
 
