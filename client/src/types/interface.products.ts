@@ -7,8 +7,8 @@ interface IProducts {
     quantity: number,
     description: string,
     image: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     customer_id: IUser["_id"];
 }
 

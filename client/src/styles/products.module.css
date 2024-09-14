@@ -1,6 +1,15 @@
 .products-page {
     margin: 0;
     font-size: 8pt;
+    display: block;
+
+    & .page-label {
+        font-size: 11pt;
+        margin: 1rem 1rem 0 1rem;
+        background-image: linear-gradient(88deg, #C850C0, 10%, #0974ff, 50%, #1ffff4 100%);
+        background-clip: text;
+        color: transparent;
+    }
 
     & .products-cards {
         color: var(--darkModeColor);
@@ -19,6 +28,7 @@
                 justify-content: center;
                 border-radius: 1rem;
                 list-style: none;
+                cursor: pointer;
 
                 & img {
                     border-radius: 1rem;

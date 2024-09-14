@@ -1,0 +1,6 @@
+.details-component {
+    display: flex;
+    font-size: 11pt;
+    width: fit-content;
+    height: auto;
+}
