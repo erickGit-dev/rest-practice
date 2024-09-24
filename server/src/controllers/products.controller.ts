@@ -2,34 +2,47 @@ import { Request, Response } from "express";
 import dotenv from "dotenv";
 import Products from "../models/products.model";
 import { IProducts } from "../interfaces/products.interface";
-import { closeConnection } from "../connection/database.connection";
+import mongoose from "mongoose";
 dotenv.config();
 
-const addProducts = async (req: Request, res: Response) => {
+const addProducts = async (req: Request, res: Response): Promise<unknown> => {
     const data: IProducts = req.body;
     if (!data) {
-        res.status(400).send({
+        return res.status(400).send({
             error: 'Please fill all the fields'
         });
     }
 
     try {
         await Products.insertMany(data);
-        res.status(200).send({
+        return res.status(200).send({
             message: 'Products added correctly'
         })
     } catch (error) {
         console.error(error);
-        res.status(500).send({
+        return res.status(500).send({
             error: 'Internal server Error'
         })
     }
 }
 
-const getProducts = async (req: Request, res: Response) => {
+const getProducts = async (req: Request, res: Response): Promise<unknown> => {
+    const products_id = req.params.id;
+
     try {
-        const products: unknown = await Products.find({});
-        res.status(200).send(products);
+        if (products_id) {
+            if(!mongoose.Types.ObjectId.isValid(products_id)) {
+                return res.status(400).send('Invalid _id format');
+            }
+            const products: unknown = await Products.findById(products_id);
+            if (!products) {
+                 return res.status(404).send('Products dont found');
+            }
+            return res.status(200).send(products);
+        } else {
+            const products: unknown = await Products.find({});
+            res.status(200).send(products);
+        }
     } catch (error) {
         console.error(error);
         res.status(500).send({
@@ -54,7 +67,7 @@ const updateProducts = async (req: Request, res: Response): Promise<void> => {
         res.status(200).json({
             message: 'Products update correctly'
         });
-    
+
     } catch (error) {
         res.status(500).json({
             message: 'Internal server errot'
