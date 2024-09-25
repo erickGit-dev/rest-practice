@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import IProducts from "../../types/interface.products";
 import { config } from "../../config";
 import style from "../../styles/products.module.css";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const Products: React.FC = () => {
   const [ products, setProducts ] = useState<IProducts[]>([]);
   const [ loading, setLoading ] = useState<boolean>(true);
   const [ error, setError ] = useState<string | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleClick = () => {
-    navigate('/details');
+  const handleClick = (id: string) => {
+    navigate(`/products/details/${id}`);
   }
 
   useEffect(() => {
@@ -36,24 +37,31 @@ const Products: React.FC = () => {
 
   if (loading) return <div className={style[ 'loading' ]}>Loading...</div>;
   if (error) return <div className={style[ 'error' ]}>Error: {error}</div>;
+  const isDetailsPage = location.pathname.includes('details');
 
   return (
     <div className={style[ 'products-page' ]}>
-      <div className={style[ 'page-label' ]}>Products list</div>
-      <div className={style[ 'products-cards' ]}>
-        <ul>
-          {
-            products.map((products) => (
-              <li key={products._id} onClick={handleClick}>
-                <img src={products.image} alt={products.description} />
-                <p>Name: {products.name}</p>
-                <p>Price: {products.price}</p>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </div>  
+      {!isDetailsPage && (
+        <div>
+          <div className={style[ 'page-label' ]}>Products list</div>
+          <div className={style[ 'products-cards' ]}>
+            <ul>
+              {products.map((product) => (
+                <li key={product._id} >
+                  <img src={product.image}
+                  alt={product.description}
+                  onClick={() => handleClick(product._id)}/>
+                  <p>Name: {product.name}</p>
+                  <p>Price: {product.price}</p>
+                  <button>Add to the car</button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+      <Outlet />
+    </div>
   );
 }
 

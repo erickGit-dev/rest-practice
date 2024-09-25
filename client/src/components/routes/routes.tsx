@@ -13,14 +13,21 @@ const router = createBrowserRouter([ {
     element: <App />,
     children: [
         { path: "", element: <Home /> },
-        { path: "products", element: <Products /> },
+        {
+            path: "products",
+            element: <Products />,
+            children: [
+                {
+                    path: "details/:id",
+                    element: <Details />
+                }
+            ]
+        },
         { path: "contacts", element: <Contacts /> },
         { path: "about", element: <About /> },
         { path: "signup", element: <Signup /> },
-        { path: "login", element: <Login /> },
-        { path: "details", element: <Details /> }
+        { path: "login", element: <Login /> }
     ]
 } ])
 
 export default router;
-
