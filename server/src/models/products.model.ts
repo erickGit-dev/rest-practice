@@ -1,41 +1,71 @@
-import mongoose from "mongoose";
-import { IProducts } from "../interfaces/products.interface";
+import { model, Schema } from "mongoose";
+import IProducts from "../interfaces/products.interface";
 
-const schema = new mongoose.Schema<IProducts>({
+const productSchema = new Schema<IProducts>({
     name: {
         type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true,
+        required: [ true, 'Product name is required' ],
+        trim: true,
+        minlength: [ 3, 'Product name must be at least 3 characters long' ]
     },
     description: {
         type: String,
-        required: true,
+        required: [ true, 'Product description is required' ],
+        minlength: [ 10, 'Description must be at least 10 characters long' ]
     },
-    quantity: {
+    price: {
         type: Number,
-        require: true
+        required: [ true, 'Price is required' ],
+        min: [ 0, 'Price must be a positive number' ]
     },
-    image: {
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
+        required: [ true, 'Category is required' ]
+    },
+    brand: {
         type: String,
-        required: true
+        required: [ true, 'Brand is required' ]
     },
-    createdAt: {
-        type: Date,
-        required: false
+    stock: {
+        type: Number,
+        required: [ true, 'Stock is required' ],
+        min: [ 0, 'Stock cannot be negative' ]
     },
-    updatedAt: {
-        type: Date,
-        required: false
+    images: {
+        type: [ String ], // Array de URLs de imágenes
+        validate: {
+            validator: (v: string[]) => v.length > 0,
+            message: 'At least one image is required'
+        }
     },
-    customer_id: {
-        type: "ObjectId",
-        required: false,
-        unique: false
-    }
+    attributes: {
+        color: { type: String },
+        weight: { type: String },
+        dimensions: { type: String }
+    },
+    rating: {
+        type: Number,
+        default: 0,
+        min: [ 0, 'Rating must be at least 0' ],
+        max: [ 5, 'Rating cannot exceed 5' ]
+    },
+    reviews: [
+        {
+            user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+            comment: { type: String, required: true },
+            rating: {
+                type: Number,
+                required: true,
+                min: [ 1, 'Rating must be at least 1' ],
+                max: [ 5, 'Rating cannot exceed 5' ]
+            },
+            date: { type: Date, default: Date.now }
+        }
+    ]
+}, {
+    timestamps: true
 });
 
-const Products = mongoose.model("Products", schema);
-export default Products
+const Product = model<IProducts>('Product', productSchema);
+export default Product;

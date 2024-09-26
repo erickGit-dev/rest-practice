@@ -3,12 +3,12 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import User from "../models/user.model";
-import { IUser } from "../interfaces/user.interface";
+import IUsers from "../interfaces/users.interface";
 dotenv.config();
 const blacklist = new Set();
 
-const signUP = async (req: Request, res: Response): Promise<void> => {
-    const data: IUser = req.body;
+const signUp = async (req: Request, res: Response): Promise<void> => {
+    const data: IUsers = req.body;
     try {
         const hashPassword: string = await bcrypt.hash(data.password, 8);
         data.password = hashPassword;
@@ -32,9 +32,9 @@ const signUP = async (req: Request, res: Response): Promise<void> => {
 };
 
 const logIn = async (req: Request, res: Response): Promise<void> => {
-    const data: IUser = req.body;
+    const data: IUsers = req.body;
     const key: string = process.env.PRIVATE_KEY || '';
-    const user: IUser | null = await User.findOne({
+    const user: IUsers | null = await User.findOne({
         email: data.email
     });
 
@@ -79,15 +79,13 @@ const listUsers = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-
-
 const updateUser = async (req: Request, res: Response): Promise<void> => {
-    const data: IUser = req.body;
+    const data: IUsers = req.body;
     const hashPassword: string = await bcrypt.hash(data.password, 8);
     data.password = hashPassword;
 
     try {
-        const user: IUser | null = await User.findOneAndUpdate(
+        const user: IUsers | null = await User.findOneAndUpdate(
             { _id: req.params.id },
             data
         );
@@ -109,7 +107,7 @@ const updateUser = async (req: Request, res: Response): Promise<void> => {
 
 const deleteUser = async (req: Request, res: Response): Promise<void> => {
     try {
-        const user: IUser | null = await User.findByIdAndDelete(req.params.id)
+        const user: IUsers | null = await User.findByIdAndDelete(req.params.id)
         if (!user) {
             res.status(404).json({
                 message: 'User dont found'
@@ -126,5 +124,4 @@ const deleteUser = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-
-export { signUP, logIn, logOut, listUsers, updateUser, deleteUser, blacklist };
+export { signUp, logIn, logOut, listUsers, updateUser, deleteUser, blacklist };

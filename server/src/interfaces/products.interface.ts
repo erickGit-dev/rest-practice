@@ -1,14 +1,25 @@
-import { Types } from "mongoose";
-import { IUser } from "./user.interface";
+import { Schema, model, Document } from 'mongoose';
 
-export interface IProducts {
-    _id: Types.ObjectId;
-    name: string;
-    price: number;
-    quantity: number;
-    description: string;
-    image: string;
-    createdAt: Date;
-    updatedAt: Date;
-    customer_id: IUser["_id"];
+export default interface IProducts extends Document {
+  name: string;
+  description: string;
+  price: number;
+  category: Schema.Types.ObjectId;
+  brand: string;
+  stock: number;
+  images: string[];
+  attributes: {
+    color?: string;
+    weight?: string;
+    dimensions?: string;
+  };
+  rating: number;
+  reviews: {
+    user: Schema.Types.ObjectId;
+    comment: string;
+    rating: number;
+    date: Date;
+  }[];
+  createdAt: Date;
+  updatedAt: Date;
 }

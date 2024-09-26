@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { signUP, logIn, deleteUser, updateUser, logOut, listUsers, } from "../controllers/user.controller";
+import { signUp, logIn, deleteUser, updateUser, logOut, listUsers, } from "../controllers/users.controller";
 import { authToken } from "../middlewares/auth.token";
 const router = Router();
 
-router.post('/sign-up', signUP);
+router.post('/sign-up', signUp);
 router.post('/log-in', logIn);
 router.post('/log-out', logOut);
 router.get('/users', authToken, listUsers);

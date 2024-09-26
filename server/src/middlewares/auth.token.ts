@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 import User from '../models/user.model';
-import { blacklist } from '../controllers/user.controller';
+import { blacklist } from '../controllers/users.controller';
 dotenv.config();
 declare global {
     namespace Express {
