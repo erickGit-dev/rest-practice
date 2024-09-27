@@ -1,0 +1,91 @@
+{
+    "editor.fontFamily": "'Iosevka Term'",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 12.5,
+    "editor.fontWeight": "normal",
+    "editor.fontVariations": true,
+    "terminal.integrated.fontFamily": "Iosevka Term",
+    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.fontWeight": "400",
+    "editor.scrollbar.horizontalScrollbarSize": 8,
+    "editor.scrollbar.verticalScrollbarSize": 8,
+    "window.titleBarStyle": "custom",
+    "editor.minimap.enabled": false,
+    "editor.tokenColorCustomizations": {
+        "[Dracula Theme]": {
+            "keywords": "#fabffa",
+            "numbers": "#f8477c",
+            "types": "#ff7979",
+            "strings": "#ccccff",
+            "functions": "#ba6cfa",
+            "variables": "#ca68bd",
+            "textMateRules": [
+                {
+                    "scope": [
+                        "punctuation.definition.string.begin",
+                        "punctuation.definition.string.end"
+                    ],
+                    "settings": {
+                        "foreground": "#ccccff"
+                    }
+                },
+                {
+                    "scope": [
+                        "variable.other.readwrite.alias.ts",
+                        "string.quoted.double.ts",
+                        "variable.other.object.ts",
+                        "string.quoted.single.ts"
+                    ],
+                    "settings": {
+                        "fontStyle": "italic"
+                    }
+                }
+            ]
+        }
+    },
+    "editor.guides.bracketPairs": "active",
+    "editor.defaultColorDecorators": true,
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.guides.bracketPairsHorizontal": true,
+    "editor.colorDecoratorsActivatedOn": "hover",
+    "editor.cursorBlinking": "expand",
+    "editor.cursorStyle": "line",
+    "editor.cursorWidth": 2,
+    "editor.smartSelect.selectSubwords": true,
+    "editor.autoClosingBrackets": "always",
+    "explorer.confirmDelete": false,
+    "workbench.colorCustomizations": {
+        "[Dracula Theme]": {
+            "editorBracketPairGuide.activeBackground1": "#c681ff",
+            "editorBracketPairGuide.activeBackground4": "#ffa318",
+            "editorBracketHighlight.foreground4": "#ffa318",
+            "editorWarning.foreground": "#fa68ff",
+            "editorError.foreground": "#ff3e88",
+            "editorBracketHighlight.foreground1": "#ba90ff",
+        }
+    },
+    "explorer.confirmDragAndDrop": false,
+    "typescript.updateImporjsonFileMove.enabled": "always",
+    "bitoAI.codeCompletion.enableAutoCompletion": true,
+    "bitoAI.codeCompletion.enableCommentToCode": true,
+    "editor.inlineSuggest.showToolbar": "always",
+    "workbench.iconTheme": "vscode-icons",
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "bitoAI.appearance.fontSize (Match with IDE Font)": false,
+    "workbench.colorTheme": "Dracula Theme",
+    "dart.flutterSdkPath": "C:\\tools\\flutter",
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "debug.console.fontSize": 13,
+    "debug.console.fontFamily": "Iosevka",
+    "debug.enableStatusBarColor": true,
+}

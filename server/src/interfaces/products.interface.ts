@@ -8,7 +8,7 @@ export default interface IProducts extends Document {
   brand: string;
   stock: number;
   images: string[];
-  attributes: {
+  attributes: { 
     color?: string;
     weight?: string;
     dimensions?: string;

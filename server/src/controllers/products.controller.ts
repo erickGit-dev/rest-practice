@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import dotenv from "dotenv";
 import Products from "../models/products.model";
-import { IProducts } from "../interfaces/products.interface";
+import IProducts from "../interfaces/products.interface";
 import mongoose from "mongoose";
 dotenv.config();
 
@@ -95,4 +95,4 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-export { addProducts, getProducts, updateProducts, deleteProduct };
+export { addProducts, getProducts, updateProducts, deleteProduct }; 

@@ -28,6 +28,5 @@ const cartSchema = new Schema<ICart>({
   timestamps: { createdAt: false, updatedAt: true } 
 });
 
-// Exportamos el modelo
 const Cart = model<ICart>('Cart', cartSchema);
 export default Cart;

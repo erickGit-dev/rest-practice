@@ -33,7 +33,7 @@ const productSchema = new Schema<IProducts>({
         min: [ 0, 'Stock cannot be negative' ]
     },
     images: {
-        type: [ String ], // Array de URLs de imágenes
+        type: [ String ],
         validate: {
             validator: (v: string[]) => v.length > 0,
             message: 'At least one image is required'
