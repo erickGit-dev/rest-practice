@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
-import User from '../models/user.model';
-import { blacklist } from '../controllers/uses.controller';
+import Users from '../models/users.model';
+import { blacklist } from '../controllers/users.controller';
 dotenv.config();
 declare global {
     namespace Express {
@@ -29,10 +29,10 @@ export const authToken = async (req: Request, res: Response, next: NextFunction)
         const key = process.env.PRIVATE_KEY || '';
         const decoded = jwt.verify(token, key) as { username: string }; 
 
-        const user = await User.findOne({ name: decoded.username });
+        const user = await Users.findOne({ name: decoded.username });
         req.user = decoded;
 
-        if (user?.rol === 'admin') {
+        if (user?.role === 'admin') {
             return next();
         } else {
             if (req.path === '/users' || req.path.startsWith('/updateUser/') || req.path.startsWith('/deleteUser/')) {
