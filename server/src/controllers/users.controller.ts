@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { responses } from "../utils/responses";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
@@ -7,29 +8,31 @@ import Users from "../models/users.model";
 dotenv.config();
 const blacklist = new Set();
 
-const signUp = async (req: Request, res: Response): Promise<void> => {
+const signUp = async (req: Request, res: Response): Promise<any> => {
     const data: IUsers = req.body;
     try {
+        const user = await Users.findOne({ email: data.email });
+        if (user) {
+            return res.status(409).send({
+                message: responses.singUp.EMAIL_EXIST
+            });
+        }
+
         const hashPassword: string = await bcrypt.hash(data.password, 8);
         data.password = hashPassword;
-        const user = await Users.findOne({ email: data.email })
-        if (data.email == user?.email) {
-            res.status(409).send({
-                message: 'Email already exist'
-            });
-        } else {
-            await Users.insertMany(data);
-            res.status(200).send({
-                message: 'User added correctly'
-            })
-        }
+
+        await Users.create(data);
+        return res.status(201).send({
+            message: responses.singUp.USER_ADDED_CORRECTLY
+        });
     } catch (err) {
         console.error(err);
-        res.status(500).send({
-            error: 'Internal server error'
+        return res.status(500).send({
+            error: responses.serverError.INTERNAL_SERVER,
         });
     }
 };
+
 
 const logIn = async (req: Request, res: Response): Promise<void> => {
     const data: IUsers = req.body;
@@ -58,8 +61,8 @@ const logIn = async (req: Request, res: Response): Promise<void> => {
 }
 
 const logOut = (req: Request, res: Response) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+    const authHeader = req.headers[ 'authorization' ];
+    const token = authHeader && authHeader.split(' ')[ 1 ];
     console.log(token);
     if (token) {
         blacklist.add(token);
