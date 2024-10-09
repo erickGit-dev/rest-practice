@@ -7,6 +7,7 @@ export const responses = {
         USER_ADDED_CORRECTLY: 'User added correctly',
     },
     logIn: {
-
+        INCORRECT_CREDENTIALS: 'Incorrect credentials',
+        DONE_RESPONSE: 'Login successfully'
     }
 } 

@@ -34,27 +34,40 @@ const signUp = async (req: Request, res: Response): Promise<any> => {
 };
 
 
-const logIn = async (req: Request, res: Response): Promise<void> => {
+const logIn = async (req: Request, res: Response): Promise<any> => {
     const data: IUsers = req.body;
-    const key: string = process.env.PRIVATE_KEY || '';
+    const key: string = process.env.PRIVATE_KEY as string;
+
+    if (!key) {
+        console.error('PRIVATE_KEY is not set in environment variables.');
+        return res.status(500).json({
+            success: true,
+            message: responses.serverError.INTERNAL_SERVER
+        });
+    }
+
     const user: IUsers | null = await Users.findOne({
         email: data.email
     });
 
-    if (!user || !bcrypt.compareSync(data.password, user.password)) {
+    if (!user || !bcrypt.compare(data.password, user.password)) {
         res.status(401).json({
-            message: 'Incorrect credentials'
+            success: false,
+            message: responses.logIn.INCORRECT_CREDENTIALS
         });
     } else {
-        const token = jwt.sign({ name: user.name }, key);
+        const token = jwt.sign({ name: user.name }, key, { algorithm: 'HS256', expiresIn: '1h' });
         console.log(token);
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'none'
-        });
+            sameSite: 'none',
+            maxAge: 3600000,
+        }); 
+
         res.json({
-            message: 'Login successfully',
+            success: true,
+            message: responses.logIn.DONE_RESPONSE,
             token
         });
     }
