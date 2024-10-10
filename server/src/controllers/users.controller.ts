@@ -41,7 +41,7 @@ const logIn = async (req: Request, res: Response): Promise<any> => {
     if (!key) {
         console.error('PRIVATE_KEY is not set in environment variables.');
         return res.status(500).json({
-            success: true,
+            success: false,
             message: responses.serverError.INTERNAL_SERVER
         });
     }

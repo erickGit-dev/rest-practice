@@ -7,9 +7,10 @@ const createConnection = async () => {
     try {
         !URI_DB ? console.log(`Connection string error`) :
             await mongoose.connect(URI_DB), {
-                useNewUrlParser: true,
-                useUnifiedTopology: true
-            };
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        };
+
         console.log({
             text: `Connection successfuly created`
         });

@@ -7,11 +7,12 @@
   "scripts": {
     "backup": "mongodump --db mongodb://localhost:27017/api-database --out src/backup",
     "restore": "mongorestore api-database --drop src/backup/api-database",
-    "clear": "rmdir /s /q /dist",
     "build": "tsc",
     "start": "tsx dist/app.js",
     "dev": "nodemon",
-    "dev:tsx": "tsx --watch src/app.ts"
+    "dev:tsx": "tsx --watch src/app.ts",
+    "backup:json": "tsc && node src/backup/collections.js",
+    "backup:ts": "tsx src/backup/collections.ts"
   },
   "author": "Erick",
   "license": "MIT",
