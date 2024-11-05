@@ -63,7 +63,7 @@ const logIn = async (req: Request, res: Response): Promise<any> => {
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'none',
             maxAge: 3600000,
-        }); 
+        });
 
         res.json({
             success: true,
@@ -74,15 +74,31 @@ const logIn = async (req: Request, res: Response): Promise<any> => {
 }
 
 const logOut = (req: Request, res: Response) => {
-    const authHeader = req.headers[ 'authorization' ];
-    const token = authHeader && authHeader.split(' ')[ 1 ];
-    console.log(token);
-    if (token) {
+    try {
+        const authHeader = req.headers[ 'authorization' ];
+        if (!authHeader) {
+            return res.status(400).json({
+                message: responses.logOut.NO_AUTORTHIZATION
+            });
+        }
+
+        const token = authHeader.split(' ')[ 1 ];
+        if (!token) {
+            return res.status(400).send({
+                message: responses.logOut.NO_TOKEN
+            });
+        }
+
         blacklist.add(token);
         res.clearCookie('token');
-        res.status(200).send('Logged out');
-    } else {
-        res.status(404).send('No token provided');
+        res.status(200).send({
+            message: responses.logOut.LOGOUT_SUCCESSFULLY
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({
+            message: responses.serverError.INTERNAL_SERVER
+        });
     }
 };
 
@@ -95,49 +111,72 @@ const listUsers = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-const updateUser = async (req: Request, res: Response): Promise<void> => {
-    const data: IUsers = req.body;
-    const hashPassword: string = await bcrypt.hash(data.password, 8);
-    data.password = hashPassword;
+const updateUser = async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+        return res.status(400).json({
+            message: responses.deleteUser.INVALID_ID_FORMAT
+        });
+    }
+
+    const data: Partial<IUsers> = req.body;
+    if (data.password) {
+        data.password = await bcrypt.hash(data.password, 8);
+    }
 
     try {
         const user: IUsers | null = await Users.findOneAndUpdate(
-            { _id: req.params.id },
-            data
+            { _id: id },
+            data,
+            { new: true }
         );
+
         if (!user) {
-            res.status(404).json({
-                message: 'Document not found'
+            return res.status(404).json({
+                message: responses.updateUser.DOCUMENT_DONT_FOUND
             });
         }
+
         res.json({
-            message: 'Document updated successfully'
+            message: responses.updateUser.USER_UPDATED_CORRECTLY,
+            user
         });
     } catch (error) {
         console.error(error);
         res.status(500).json({
-            message: 'Internal server error'
+            message: responses.serverError.INTERNAL_SERVER
         });
     }
-}
+};
 
-const deleteUser = async (req: Request, res: Response): Promise<void> => {
+const deleteUser = async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+        return res.status(400).json({
+            message: responses.deleteUser.INVALID_ID_FORMAT
+        });
+    }
+
     try {
-        const user: IUsers | null = await Users.findByIdAndDelete(req.params.id)
+        const user: IUsers | null = await Users.findByIdAndDelete(id);
+
         if (!user) {
-            res.status(404).json({
-                message: 'User dont found'
+            return res.status(404).json({
+                message: responses.deleteUser.USER_NOT_FOUND
             });
         }
+
         res.status(200).json({
-            message: 'User deleted correctly'
+            message: responses.deleteUser.USER_DELETE_SUCCESSFULY
         });
     } catch (error) {
-        console.error(error)
+        console.error(error);
         res.status(500).json({
-            message: 'Internal server error'
+            message: responses.serverError.INTERNAL_SERVER
         });
     }
-}
+};
 
 export { signUp, logIn, logOut, listUsers, updateUser, deleteUser, blacklist };

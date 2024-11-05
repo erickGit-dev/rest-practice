@@ -5,8 +5,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "backup": "mongodump --db mongodb://localhost:27017/api-database --out src/backup",
-    "restore": "mongorestore api-database --drop src/backup/api-database",
+    "backup": "mongodump /db:api-database --out src/backup",
+    "restore": "mongorestore /db:api-database --drop src/backup/api-database",
     "build": "tsc",
     "start": "tsx dist/app.js",
     "dev": "nodemon",

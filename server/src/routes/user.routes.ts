@@ -7,7 +7,7 @@ router.post('/sign-up', signUp);
 router.post('/log-in', logIn);
 router.post('/log-out', logOut);
 router.get('/users', authToken, listUsers);
-router.put('/update-user/:id', authToken, updateUser);
-router.delete('/delete-user/:id', authToken, deleteUser);
+router.put('/update-user/:id', updateUser);
+router.delete('/delete-user/:id', deleteUser);
 
 export default router;
