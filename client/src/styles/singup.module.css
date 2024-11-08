@@ -66,6 +66,11 @@
             }
         }
 
+        & .next-previous {
+            display: flex;
+            flex-direction: row;
+        }
+
         .errors {
             font-size: 10pt;
             color: var(--errorColor);

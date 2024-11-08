@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import style from "../../styles/login.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import IUser from "../../types/interface.user";
+import IUsers from "../../types/interface.user";
 import { TErrors } from "../../types/type.error";
 import { config } from "../../config";
 
 const Login: React.FC = () => {
-  const initalState: IUser = {
-    _id: '',
-    email: '',
-    password: '',
-    name: '',
-    lastName: ''
+  const initalState: IUsers = {
+    name: "",
+    email: "",
+    password: "",
+    address: {
+      street: "",
+      city: "",
+      state: "",
+      postalCode: ""
+    },
+    phone: ""
   };
 
-  const [data, setData] = useState<IUser>(initalState);
+  const [data, setData] = useState<IUsers>(initalState);
   const [error, setError] = useState<TErrors>({});
   const [response, setResponse] = useState<string>('');
   const navigate = useNavigate();

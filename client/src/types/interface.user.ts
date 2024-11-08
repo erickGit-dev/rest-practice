@@ -1,9 +1,14 @@
-interface IUser {
-    _id: string; 
+interface IUsers {
     name: string,
-    lastName: string,
     email: string,
     password: string,
+    address: {
+        street: string,
+        city: string,
+        state: string,
+        postalCode: string
+    },
+    phone: string
 }
 
-export default IUser
+export default IUsers

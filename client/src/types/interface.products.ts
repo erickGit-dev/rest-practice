@@ -1,4 +1,4 @@
-import IUser from "./interface.user";
+import IUsers from "./interface.user";
 
 interface IProducts {
     _id: string,
@@ -9,7 +9,7 @@ interface IProducts {
     image: string;
     createdAt: string;
     updatedAt: string;
-    customer_id: IUser["_id"];
+    customer_id: IUsers;
 }
 
 export default IProducts;
