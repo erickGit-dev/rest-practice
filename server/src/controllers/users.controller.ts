@@ -33,7 +33,6 @@ const signUp = async (req: Request, res: Response): Promise<any> => {
     }
 };
 
-
 const logIn = async (req: Request, res: Response): Promise<any> => {
     const data: IUsers = req.body;
     const key: string = process.env.PRIVATE_KEY as string;
@@ -51,7 +50,7 @@ const logIn = async (req: Request, res: Response): Promise<any> => {
     });
 
     if (!user || !bcrypt.compare(data.password, user.password)) {
-        res.status(401).json({
+        return res.status(401).json({
             success: false,
             message: responses.logIn.INCORRECT_CREDENTIALS
         });
@@ -65,7 +64,7 @@ const logIn = async (req: Request, res: Response): Promise<any> => {
             maxAge: 3600000,
         });
 
-        res.json({
+        return res.json({
             success: true,
             message: responses.logIn.DONE_RESPONSE,
             token
@@ -76,19 +75,7 @@ const logIn = async (req: Request, res: Response): Promise<any> => {
 const logOut = (req: Request, res: Response) => {
     try {
         const authHeader = req.headers[ 'authorization' ];
-        if (!authHeader) {
-            return res.status(400).json({
-                message: responses.logOut.NO_AUTORTHIZATION
-            });
-        }
-
-        const token = authHeader.split(' ')[ 1 ];
-        if (!token) {
-            return res.status(400).send({
-                message: responses.logOut.NO_TOKEN
-            });
-        }
-
+        const token = authHeader?.split(' ')[ 1 ];
         blacklist.add(token);
         res.clearCookie('token');
         res.status(200).send({

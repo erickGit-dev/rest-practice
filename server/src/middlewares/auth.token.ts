@@ -13,8 +13,8 @@ declare global {
 }
 
 export const authToken = async (req: Request, res: Response, next: NextFunction): Promise<unknown> => {
-    const authHeaders = req.headers['authorization'];
-    const token: string | undefined = authHeaders && authHeaders.split(' ')[1];
+    const authHeader = req.headers[ 'authorization' ];
+    const token = authHeader?.split(' ')[ 1 ];
     console.log({ message: 'token received', token });
 
     if (!token) {
@@ -27,7 +27,7 @@ export const authToken = async (req: Request, res: Response, next: NextFunction)
 
     try {
         const key = process.env.PRIVATE_KEY || '';
-        const decoded = jwt.verify(token, key) as { username: string }; 
+        const decoded = jwt.verify(token, key) as { username: string };
 
         const user = await Users.findOne({ name: decoded.username });
         req.user = decoded;
