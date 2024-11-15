@@ -52,11 +52,10 @@ const productSchema = new Schema<IProducts>({
     },
     reviews: [
         {
-            user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-            comment: { type: String, required: true },
+            user: { type: Schema.Types.ObjectId, ref: 'User'},
+            comment: { type: String},
             rating: {
                 type: Number,
-                required: true,
                 min: [ 1, 'Rating must be at least 1' ],
                 max: [ 5, 'Rating cannot exceed 5' ]
             },
