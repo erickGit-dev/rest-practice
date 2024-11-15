@@ -1,15 +1,28 @@
-import IUsers from "./interface.user";
+type ObjectId = string;
 
-interface IProducts {
-    _id: string,
-    name: string,
-    price: number,
-    quantity: number,
-    description: string,
-    image: string;
-    createdAt: string;
-    updatedAt: string;
-    customer_id: IUsers;
+export interface IProducts {
+    _id: ObjectId;
+    name: string;
+    description: string;
+    price: number;
+    category: string;
+    brand: string;
+    stock: number;
+    images: string[];
+    attributes?: {
+        color?: string;
+        weight?: string;
+        dimensions?: string;
+    };
+    rating?: number;
+    reviews?: IReview[];
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
-export default IProducts;
+export interface IReview {
+    user: ObjectId; 
+    comment: string;
+    rating: number;
+    date?: Date;
+}

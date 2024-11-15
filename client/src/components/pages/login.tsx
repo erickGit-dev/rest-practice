@@ -7,6 +7,7 @@ import { config } from "../../config";
 
 const Login: React.FC = () => {
   const initalState: IUsers = {
+    _id: "",
     name: "",
     email: "",
     password: "",

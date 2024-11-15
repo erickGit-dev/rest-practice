@@ -1,3 +1,4 @@
+@import '../styles/App.module.css';
 
 .log-in {
     margin: 0;
@@ -27,9 +28,11 @@
         flex-direction: column;
         border-radius: 1rem;
         align-items: center;
-        background-color: var(--lightModeBackground);
-        width: 12em;
-        padding: 8rem;
+        font-size: 0.8rem;
+        background-color: var(--darkModeCard);
+        width: 23em;
+        height: 100%;
+        padding: 5rem;
         margin: 2rem;
         color: var(--darkModeText);
 
@@ -42,21 +45,14 @@
             margin: 0.5rem;
             padding: 0.5rem;
             border-radius: 0.5rem;
-            transition: width 0.3s ease-in-out;
             border: none;
-            background-color: var(--offDarkModeBackground);
-
-            &[type=email] {
-                width: 11rem;
-            }
-
-            &[type=password] {
-                width: 11rem;
-            }
+            background-color: var(--darkModeBody);
+            transition: 3.8rem 0.5s ease-in;
+            width: 13rem;
 
             &:focus {
                 outline: none;
-                border: 0.2em solid var(--lightModeBackground);
+                border: 0.2em solid var(--focusDarkMode);
             }
         }
 

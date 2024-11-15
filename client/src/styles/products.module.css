@@ -1,7 +1,10 @@
+@import '../styles/App.module.css';
+
 .products-page {
     margin: 0;
     font-size: 9pt;
     display: block;
+    color: var(--darkModeColor);
 
     & .page-label {
         font-size: 11pt;

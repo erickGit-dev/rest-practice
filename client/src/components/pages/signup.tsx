@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "../../styles/singup.module.css"
 import { Link, useNavigate } from "react-router-dom";
 import IUsers from "../../types/interface.user";
@@ -7,6 +7,7 @@ import { TErrors } from "../../types/type.error";
 
 const Signup: React.FC = () => {
   const initalState: IUsers = {
+    _id: '',
     name: '',
     email: '',
     password: '',
@@ -48,21 +49,13 @@ const Signup: React.FC = () => {
 
   const handleClick = () => {
     const errors = handleErrors();
-    console.log("Errores detectados:", errors); // Verifica los errores antes de actualizar el estado
 
     setError(errors);
     if (Object.keys(errors).length === 0) {
-      console.log("No errors, calling nextStep");
       nextStep();
-    } else {
-      console.log("Errors found, not calling nextStep");
-    }
-  };
-
-  const handleFocus = () => {
-    setError({});
+    };
   }
-  
+
   const previousStep = () => setStep((prevStep) => prevStep - 1);
   const nextStep = () => setStep((prevStep) => prevStep + 1);
 
@@ -101,7 +94,6 @@ const Signup: React.FC = () => {
     const errorValidation = handleErrors();
     setError(errorValidation);
     setResponse('');
-    alert(JSON.stringify(data));
     if (Object.keys(errorValidation).length === 0) {
       try {
         const req = await fetch(signUpURL, {
@@ -129,6 +121,7 @@ const Signup: React.FC = () => {
       <Link to="/" className={style[ 'app-name' ]}>Cer0</Link>
       <form onSubmit={handleSubmit}>
         <div className={style[ 'card' ]}>
+        Wellcome to Cer0
           <div className={style[ 'response' ]} >
             {response}
           </div>
@@ -149,7 +142,9 @@ const Signup: React.FC = () => {
                 onChange={handleChange}
                 placeholder="Email" />
               <div className={style[ 'errors' ]}>{error.email}</div>
-              <button type="button" onClick={handleClick}>Next</button>
+              <div className={style[ 'next-previous' ]} >
+                <button type="button" onClick={handleClick}>Next</button>
+              </div>
             </div>
           )}
 
@@ -164,7 +159,7 @@ const Signup: React.FC = () => {
               <div className={style[ 'errors' ]}>{error.password}</div>
               <div className={style[ 'next-previous' ]}>
                 <button type="button" onClick={previousStep}>Previous</button>
-                <button type="button" onClick={handleClick} >Next</button>
+                <button type="button" onClick={handleClick}>Next</button>
               </div>
             </div>
           )}
@@ -223,8 +218,8 @@ const Signup: React.FC = () => {
             </div>
           )}
         </div>
-      </form>
-    </div>
+      </form >
+    </div >
   );
 }
 

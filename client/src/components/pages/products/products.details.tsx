@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import style from "../../../styles/products/details.module.css"
 import { useEffect, useState } from "react";
 import { config } from "../../../config";
-import IProducts from "../../../types/interface.products";
+import { IProducts } from "../../../types/interface.products";
 
 const Details: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -38,7 +38,7 @@ const Details: React.FC = () => {
     return (
         <div className={style[ 'products-details' ]}>
             <p>product id: {productDetailed?._id}</p>
-            <img src={productDetailed?.image}
+            <img src={productDetailed?.images ? productDetailed.images[0] : undefined}
                 alt={productDetailed?.description}
                 width={500} height={500} />
             <p>price: {productDetailed?.price}</p>

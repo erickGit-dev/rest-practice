@@ -1,3 +1,4 @@
+@import '../styles/App.module.css';
 
 .sing-up {
     margin: 0;
@@ -28,9 +29,9 @@
         border-radius: 1rem;
         align-items: center;
         font-size: 0.8rem;
-        background-color: var(--lightModeBackground);
-        width: 15em;
-        height: 100%;  
+        background-color: var(--darkModeCard);
+        width: 23em;
+        height: 100%;
         padding: 5rem;
         margin: 2rem;
         color: var(--darkModeText);
@@ -45,30 +46,14 @@
             padding: 0.5rem;
             border-radius: 0.5rem;
             border: none;
-            background-color: var(--offDarkModeBackground);
-            transition: width 0.3s ease-in-out;
-
-            &[type=text] {
-                width: 13rem;
-            }
-
-            &[type=email] {
-                width: 11rem;
-            }
-
-            &[type=password] {
-                width: 11rem;
-            }
+            background-color: var(--darkModeBody);
+            transition: 3.8rem 0.5s ease-in;
+            width: 13rem;
 
             &:focus {
                 outline: none;
-                border: 0.2em solid var(--lightModeBackground);
+                border: 0.2em solid var(--focusDarkMode);
             }
-        }
-
-        & .next-previous {
-            display: flex;
-            flex-direction: row;
         }
 
         .errors {
@@ -88,6 +73,11 @@
             &:hover {
                 background-color: var(--offDarkModeBackground);
             }
+        }
+
+        & .next-previous {
+            display: flex;
+            flex-direction: row;
         }
 
         .log-in {

@@ -1,6 +1,6 @@
 * {
     font-family: "Roboto", sans-serif;
-    font-weight: normal;
+    font-weight: 400;
     margin: 0;
     padding: 0;
 }
@@ -8,16 +8,19 @@
 :root {
     --darkModeBackground: #080808;
     --darkModeBody: #0C0C0F;
-    --darkModeText: #D8D8D8;
+    --darkModeText: #e9e6e6;
     --darkModeTextHover: #f7f7f7;
     --lightModeBackground: #ffffff;
-    --lightModeText: #18181A;
-    --offDarkModeBackground: #18181A;
-    --errorColor: #ff3535;
+    --lightModeText: #121213;
+    --offDarkModeBackground: #1d1d1d;
+    --errorColor: #ff3535ef;
+    --darkModeCard: #181717;
+    --focusDarkMode: #242222;
+    --focusLightMode: #eeeded;
 }
 
 .body {
-    background-color: var(--mainColor);
+    background-color: var(--darkModeBackground);
     width: 100%;
     height: 100%;
     margin: 0;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import IProducts from "../../types/interface.products";
+import { IProducts } from "../../types/interface.products";
 import { config } from "../../config";
 import style from "../../styles/products.module.css";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ const Products: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleClick = (id: string) => {
+  const handleClick = (id: string | undefined) => {
     navigate(`/products/details/${id}`);
   }
 
@@ -48,9 +48,9 @@ const Products: React.FC = () => {
             <ul>
               {products.map((product) => (
                 <li key={product._id} >
-                  <img src={product.image}
-                  alt={product.description}
-                  onClick={() => handleClick(product._id)}/>
+                  <img src={product.images ? product.images[ 0 ] : undefined}
+                    alt={product.description}
+                    onClick={() => handleClick(product?._id)} />
                   <p>Name: {product.name}</p>
                   <p>Price: {product.price}</p>
                   <button>Add to the car</button>
