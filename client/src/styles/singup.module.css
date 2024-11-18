@@ -1,4 +1,4 @@
-@import '../styles/App.module.css';
+@import url('./App.module.css');
 
 .sing-up {
     margin: 0;
@@ -7,7 +7,7 @@
     justify-content: center;
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     background-color: var(--darkModeBackground);
 
@@ -52,7 +52,7 @@
 
             &:focus {
                 outline: none;
-                border: 0.2em solid var(--focusDarkMode);
+                border: 0.2em solid var(--focusDarkMode);                
             }
         }
 

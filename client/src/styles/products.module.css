@@ -4,18 +4,22 @@
     margin: 0;
     font-size: 9pt;
     display: block;
-    color: var(--darkModeColor);
+    color: var(--darkModeText);
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
 
     & .page-label {
-        font-size: 11pt;
+        font-size: 15pt;
+        font-weight: 8pt;
         margin: 1rem 1rem 0 1rem;
-        background-image: linear-gradient(88deg, #09efff, 50%,  #ff1f57 100%);
+        background-image: linear-gradient(88deg, #09efff, 50%, #ff1f57 100%);
         background-clip: text;
         color: transparent;
     }
 
     & .products-cards {
-        color: var(--darkModeColor);
+        color: var(--darkModeText);
 
         & ul {
             display: grid;
@@ -39,7 +43,36 @@
                     height: 150px;
                     cursor: pointer;
                 }
+
+                & button {
+                    background-color: var(--darkModeBackgroundContrast);
+                    color: var();
+                    font-weight: 600;
+                    width: 8rem;
+                    margin: 0.5rem;
+                    padding: 0.5rem;
+                    border-radius: 0.5rem;
+                    border: var(--darkModeBackground);
+
+                    &:hover {
+                        background-color: var(--darkModeTextHover);
+                    }
+                }
             }
         }
     }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--darkModeBackground);
+}
+
+::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(88deg, #09efff, 50%, #ff1f57 100%);
+    border-radius: 8px;
 }
