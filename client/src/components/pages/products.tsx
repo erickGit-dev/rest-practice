@@ -53,6 +53,8 @@ const Products: React.FC = () => {
                     onClick={() => handleClick(product?._id)} />
                   <p>Name: {product.name}</p>
                   <p>Price: {product.price}</p>
+                  <p>Brand: {product.brand}</p>
+                  <p>Stock: {product.stock}</p>
                   <button>Add to the car</button>
                 </li>
               ))}

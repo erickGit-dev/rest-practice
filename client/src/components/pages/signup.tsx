@@ -145,6 +145,8 @@ const Signup: React.FC = () => {
               <div className={style[ 'next-previous' ]} >
                 <button type="button" onClick={handleClick}>Next</button>
               </div>
+              Al ready have an account?
+              <Link to="/login" className={style[ 'log-in' ]}>Log In</Link>
             </div>
           )}
 
@@ -214,7 +216,6 @@ const Signup: React.FC = () => {
                 <button type="button" onClick={previousStep}>Previous</button>
                 <button type="submit">Sign Up</button>
               </div>
-              <Link to="/login" className={style[ 'log-in' ]}>Log In</Link>
             </div>
           )}
         </div>
