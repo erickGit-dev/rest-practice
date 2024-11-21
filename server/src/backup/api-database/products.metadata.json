@@ -1,0 +1,31 @@
+{
+    "indexes": [
+        {
+            "v": {
+                "$numberInt": "2"
+            },
+            "key": {
+                "_id": {
+                    "$numberInt": "1"
+                }
+            },
+            "name": "_id_"
+        },
+        {
+            "v": {
+                "$numberInt": "2"
+            },
+            "key": {
+                "customer_id": {
+                    "$numberInt": "1"
+                }
+            },
+            "name": "customer_id_1",
+            "background": true,
+            "unique": true
+        }
+    ],
+    "uuid": "861fb55955fd494e9accc161389602fe",
+    "collectionName": "products",
+    "type": "collection"
+}

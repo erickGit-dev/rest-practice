@@ -1,0 +1,31 @@
+{
+    "indexes": [
+        {
+            "v": {
+                "$numberInt": "2"
+            },
+            "key": {
+                "_id": {
+                    "$numberInt": "1"
+                }
+            },
+            "name": "_id_"
+        },
+        {
+            "v": {
+                "$numberInt": "2"
+            },
+            "key": {
+                "email": {
+                    "$numberInt": "1"
+                }
+            },
+            "name": "email_1",
+            "background": true,
+            "unique": true
+        }
+    ],
+    "uuid": "e9e4c9f52aa54e76ba160ec5f023da83",
+    "collectionName": "users",
+    "type": "collection"
+}

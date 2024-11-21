@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "_id": "66f63b156533544530d9b31a",
+      "name": "Galaxy s25",
+      "description": "New phone from samsung with amazing new features",
+      "price": 2334,
+      "category": "665e9b6ab864d19b09bcff3a",
+      "brand": "Samsung",
+      "stock": 88,
+      "images": [
+        "https://images.samsung.com/latin/smartphones/galaxy-s23/images/galaxy-…"
+      ],
+      "rating": 5,
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2024-09-27T04:56:53.069Z",
+      "updatedAt": "2024-09-27T04:56:53.069Z"
+    }
+  ],
+  "users": []
+}
