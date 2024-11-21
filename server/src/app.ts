@@ -1,5 +1,6 @@
 import users from "./routes/user.routes";
 import products from "./routes/products.routes";
+import orders from "./routes/order.routes";
 import express from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
@@ -7,6 +8,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import { closeConnection, createConnection } from "./connection/database.connection";
+
 dotenv.config();
 createConnection();
 
@@ -24,6 +26,7 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/v0/", users);
 app.use("/api/v1/", products);
+app.use("/api/v2/", orders);
 
 process.on('SIGINT', closeConnection);
 process.on('SIGTERM', closeConnection);

@@ -27,9 +27,6 @@ const addProducts = async (req: Request, res: Response): Promise<any> => {
     }
 };
 
-export default addProducts;
-
-
 const getProducts = async (req: Request, res: Response): Promise<any> => {
     const products_id = req.params.id;
 

@@ -66,5 +66,10 @@ const productSchema = new Schema<IProducts>({
     timestamps: true
 });
 
+productSchema.index(
+    { customer_id: 1 },
+    { unique: true, partialFilterExpression: { customer_id: { $ne: null } } }
+  );
+
 const Product = model<IProducts>('Product', productSchema);
 export default Product;
