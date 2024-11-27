@@ -8,14 +8,14 @@ dotenv.config();
 const addProducts = async (req: Request, res: Response): Promise<any> => {
     const data: IProducts = req.body;
 
-    if (!data) { 
+    if (!data) {
         return res.status(400).json({
             message: 'Please fill all the fields'
         });
     }
 
     try {
-        await Products.create(data); 
+        await Products.create(data);
         return res.status(200).json({
             message: 'Product added correctly'
         });
@@ -33,14 +33,16 @@ const getProducts = async (req: Request, res: Response): Promise<any> => {
     try {
         if (products_id) {
             if (!mongoose.Types.ObjectId.isValid(products_id)) {
-                return res.status(400).json({ 
-                    message: 'Invalid _id format' 
+                return res.status(400).json({
+                    message: 'Invalid _id format'
                 });
             }
-            
+
             const product = await Products.findById(products_id);
             if (!product) {
-                return res.status(404).json({ message: 'Product not found' });
+                return res.status(404).json({
+                    message: 'Product not found'
+                });
             }
             return res.status(200).json(product);
         } else {
@@ -99,4 +101,9 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-export { addProducts, getProducts, updateProducts, deleteProduct }; 
+export {
+    addProducts,
+    getProducts,
+    updateProducts,
+    deleteProduct
+}; 
