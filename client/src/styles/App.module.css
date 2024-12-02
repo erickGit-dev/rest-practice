@@ -20,14 +20,13 @@
     --focusLightMode: #eeeded;
     --scrollbarColor: #46466b;
     --scrollbarColorHover: #4d4d80;
-    
+    height: 100%;
 }
 
 .body {
     background-color: var(--darkModeBackground);
-    width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-}
+}   

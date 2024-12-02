@@ -15,6 +15,10 @@ const Products: React.FC = () => {
     navigate(`/products/details/${id}`);
   }
 
+  const createProducts = () => {
+    navigate(`/products/create/`);
+  }
+
   useEffect(() => {
     const fetchProducts = async () => {
       const getProducts: string = config.getProducts;
@@ -44,6 +48,7 @@ const Products: React.FC = () => {
       {!isDetailsPage && (
         <div>
           <div className={style[ 'page-label' ]}>Products list</div>
+          <button onClick={createProducts}>Create</button>
           <div className={style[ 'products-cards' ]}>
             <ul>
               {products.map((product) => (

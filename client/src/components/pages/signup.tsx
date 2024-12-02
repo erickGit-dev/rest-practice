@@ -22,7 +22,7 @@ const Signup: React.FC = () => {
 
   const [ data, setData ] = useState<IUsers>(initalState);
   const [ step, setStep ] = useState(1);
-  const [ error, setError ] = useState<TErrors>({});
+  const [ error, setError ] = useState<TErrors['users']>({});
   const [ response, setResponse ] = useState<string>('');
   const navigate = useNavigate();
 
@@ -60,7 +60,7 @@ const Signup: React.FC = () => {
   const nextStep = () => setStep((prevStep) => prevStep + 1);
 
   const handleErrors = () => {
-    const errors: TErrors = {};
+    const errors: TErrors['users'] = {};
     if (step === 1) {
       if (!data.name) {
         errors.name = 'Name is required';

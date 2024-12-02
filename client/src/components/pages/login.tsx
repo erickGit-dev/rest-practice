@@ -20,18 +20,18 @@ const Login: React.FC = () => {
     phone: ""
   };
 
-  const [data, setData] = useState<IUsers>(initalState);
-  const [error, setError] = useState<TErrors>({});
-  const [response, setResponse] = useState<string>('');
+  const [ data, setData ] = useState<IUsers>(initalState);
+  const [ error, setError ] = useState<TErrors[ 'users' ]>({});
+  const [ response, setResponse ] = useState<string>('');
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setData((preview) => ({ ...preview, [name]: value }));
+    setData((preview) => ({ ...preview, [ name ]: value }));
   };
 
   const handleErrors = () => {
-    const errors: TErrors = {}
+    const errors: TErrors[ 'users' ] = {}
     if (!data.email) {
       errors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(data.email)) {
@@ -75,16 +75,16 @@ const Login: React.FC = () => {
       } catch (error) {
         console.error(error);
       }
-    } 
+    }
   };
 
   return (
-    <div className={style['log-in']}>
-      <Link to="/" className={style['app-name']}>Cer0</Link>
+    <div className={style[ 'log-in' ]}>
+      <Link to="/" className={style[ 'app-name' ]}>Cer0</Link>
       <form onSubmit={handleSubmit}>
-        <div className={style['card']}>
+        <div className={style[ 'card' ]}>
           <span> Wellcome back!</span>
-          <div className={style['response']} >
+          <div className={style[ 'response' ]} >
             {response}
           </div>
           <input
@@ -93,17 +93,17 @@ const Login: React.FC = () => {
             value={data.email}
             onChange={handleChange}
             placeholder="Email" />
-          <div className={style['errors']}>{error.email}</div>
+          <div className={style[ 'errors' ]}>{error.email}</div>
           <input
             type="password"
             name="password"
             value={data.password}
             onChange={handleChange}
             placeholder="Password" />
-          <div className={style['errors']}>{error.password}</div>
+          <div className={style[ 'errors' ]}>{error.password}</div>
           <button type="submit">log In</button>
           New here? Join us!
-          <Link to="/signup" className={style['sign-up']}>Sign Up</Link>
+          <Link to="/signup" className={style[ 'sign-up' ]}>Sign Up</Link>
         </div>
       </form >
     </div>
