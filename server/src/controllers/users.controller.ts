@@ -5,12 +5,18 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import IUsers from "../interfaces/users.interface";
 import Users from "../models/users.model";
+
 dotenv.config();
 const blacklist = new Set();
 
 const signUp = async (req: Request, res: Response): Promise<any> => {
-    const data: IUsers = req.body;
+    const data: IUsers = { ...req.body };
+
     try {
+        if (data._id) {
+            delete data._id;
+        }
+
         const user = await Users.findOne({ email: data.email });
         if (user) {
             return res.status(409).send({

@@ -13,8 +13,11 @@ const addProducts = async (req: Request, res: Response): Promise<any> => {
             message: 'Please fill all the fields'
         });
     }
-
+    
     try {
+        if (data._id) {
+            delete data._id;
+        }
         await Products.create(data);
         return res.status(200).json({
             message: 'Product added correctly'

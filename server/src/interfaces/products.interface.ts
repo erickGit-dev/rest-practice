@@ -1,6 +1,7 @@
-import { Schema, Document } from 'mongoose';
+import { Schema } from "mongoose";
 
-export default interface IProducts extends Document {
+export default interface IProducts {
+  _id?: Schema.Types.ObjectId;
   name: string;
   description: string;
   price: number;
@@ -8,7 +9,7 @@ export default interface IProducts extends Document {
   brand: string;
   stock: number;
   images: string[];
-  attributes: { 
+  attributes: {
     color?: string;
     weight?: string;
     dimensions?: string;
